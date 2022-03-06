@@ -4,28 +4,28 @@ Tree::Tree() : value(NULL), left(NULL), right(NULL) {}
 
 void Tree::add(uint32_t value) {
   Tree *now = this;
-  Tree *added = NULL;
+  Tree *addedN = NULL;
 
-  added->value = value;
-  added->left = NULL;
-  added->right = NULL;
+  addedN->value = value;
+  addedN->left = NULL;
+  addedN->right = NULL;
 
   if (this == NULL) {
-    now = added;
+    now = addedN;
     return;
   } else {
     while (now != NULL) {
-      if (now->value <= added->value) {
+      if (now->value <= addedN->value) {
         if (now->right == NULL) {
-          now->right = added;
+          now->right = addedN;
           return;
         } else {
           now = now->right;
         }
       }
-      if (now->value > added->value) {
+      if (now->value > addedN->value) {
         if (now->left == NULL) {
-          now->left = added;
+          now->left = addedN;
           return;
         } else {
           now = now->left;
