@@ -6,14 +6,15 @@
 #include <random>
 #include <vector>
 
+template <typename message>
 class Packets {
  private:
   uint32_t packetNo;
-  friend class Tree;
 
  public:
-  std::vector<uint32_t> packetTab;
+  std::vector<std::pair<uint32_t, message>> packetTab;
   Packets(uint32_t _packetNo);
   void shuffle();
 };
+#include "Packets.tpp"
 #endif
