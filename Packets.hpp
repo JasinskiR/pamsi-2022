@@ -1,6 +1,10 @@
 #ifndef PACKETS_HPP
 #define PACKETS_HPP
+#include <algorithm>
+#include <chrono>
 #include <iostream>
+#include <random>
+#include <vector>
 
 class Packets {
  private:
@@ -8,9 +12,8 @@ class Packets {
   friend class Tree;
 
  public:
-  uint32_t *packetTab;
+  std::vector<uint32_t> packetTab;
   Packets(uint32_t _packetNo);
-  uint32_t draw(uint32_t packetNo, int itr);
-  bool check(uint32_t value, int itr);
+  void shuffle();
 };
 #endif
