@@ -1,4 +1,5 @@
 #include "Tree.hpp"
+#include "assert.h"
 
 template <typename message>
 Tree<message>::Tree() {
@@ -23,26 +24,26 @@ void Tree<message>::deleteTree(Node *node) {
 template <typename message>
 void Tree<message>::addPackets(
     std::vector<std::pair<uint32_t, message>> _pack) {
-  for (uint32_t i = 0; i < _pack.size(); ++i) {
-    add(root, _pack[i]);
+  for (auto const &packet : _pack) {
+    add(&root, packet);
   }
 }
 
 template <typename message>
-void Tree<message>::add(Node *node, std::pair<uint32_t, message> _pack) {
-  if (node == NULL) {
+void Tree<message>::add(Node **node, std::pair<uint32_t, message> _pack) {
+  if (*node == NULL) {
     Node *tmp = new Node;
     tmp->element = _pack;
     tmp->left = NULL;
     tmp->right = NULL;
-    node = tmp;
+    *node = tmp;
 
     this->treeSize++;
   } else {
-    if (_pack.first > node->element.first) {
-      add(node->right, _pack);
+    if (_pack.first > (*node)->element.first) {
+      add(&((*node)->right), _pack);
     } else {
-      add(node->left, _pack);
+      add(&((*node)->left), _pack);
     }
   }
 }
@@ -50,16 +51,18 @@ void Tree<message>::add(Node *node, std::pair<uint32_t, message> _pack) {
 template <typename message>
 void Tree<message>::p_sort() {
   Node *tmp = new Node;
-  tmp = root;
   std::cout << "Sorted message: \n";
   std::cout << "Ordinal number: \t Massage: \n";
-  for (uint32_t i = 1; i < treeSize; ++i) {
+  for (uint32_t i = 1; i <= treeSize; ++i) {
+    tmp = root;
+
     while (tmp->element.first != i) {
       if (tmp->element.first < i) {
         tmp = tmp->right;
       } else {
         tmp = tmp->left;
       }
+      assert(tmp != nullptr);
     }
     std::cout << tmp->element.first << "\t" << tmp->element.second << std::endl;
   }

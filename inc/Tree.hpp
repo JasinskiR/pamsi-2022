@@ -6,7 +6,7 @@
 template <typename message>
 class Tree {
   class Node {
-    public:
+   public:
     std::pair<uint32_t, message> element;
     Node *left;
     Node *right;
@@ -16,7 +16,7 @@ class Tree {
   uint32_t treeSize;
   Node *root;
   void deleteTree(Node *node);
-  void add(Node *node, std::pair<uint32_t, message> _pack);
+  void add(Node **node, std::pair<uint32_t, message> _pack);
 
  public:
   Tree();
