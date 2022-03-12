@@ -16,5 +16,4 @@ class Packets {
   Packets(uint32_t _packetNo);
   void shuffle();
 };
-#include "Packets.tpp"
 #endif

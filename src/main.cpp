@@ -9,6 +9,7 @@ int main() {
   cout << "Enter the number of packets : ";
   cin >> packetNo;
   Packets<uint32_t> packets(packetNo);
-  Tree<uint32_t> tree(packets.packetTab);
+  Tree<uint32_t> tree;
+  tree.addPackets(packets.packetTab);
   tree.p_sort();
 }

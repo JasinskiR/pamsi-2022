@@ -1,62 +1,66 @@
 #include "Tree.hpp"
 
 template <typename message>
-Tree<message>::Tree(std::vector<std::pair<uint32_t, message>> _pack)
-    : left(NULL), right(NULL) {
-  for (uint32_t i = 0; i < _pack.size(); ++i) {
-    add(_pack[i]);
-  }
-  quantity = _pack.size();
+Tree<message>::Tree() {
+  root = NULL;
+  treeSize = 0;
 }
 
 template <typename message>
-void Tree<message>::add(std::pair<uint32_t, message>) {
-  Tree *now = this;
-  Tree *addedN = NULL;
+Tree<message>::~Tree() {
+  deleteTree(root);
+}
 
-  addedN->pack.first = pack.first;
-  addedN->left = NULL;
-  addedN->right = NULL;
+template <typename message>
+void Tree<message>::deleteTree(Node *node) {
+  if (node != NULL) {
+    deleteTree(node->left);
+    deleteTree(node->right);
+    delete node;
+  }
+}
 
-  if (now == NULL) {
-    now = addedN;
-    return;
+template <typename message>
+void Tree<message>::addPackets(
+    std::vector<std::pair<uint32_t, message>> _pack) {
+  for (uint32_t i = 0; i < _pack.size(); ++i) {
+    add(root, _pack[i]);
+  }
+}
+
+template <typename message>
+void Tree<message>::add(Node *node, std::pair<uint32_t, message> _pack) {
+  if (node == NULL) {
+    Node *tmp = new Node;
+    tmp->element = _pack;
+    tmp->left = NULL;
+    tmp->right = NULL;
+    node = tmp;
+
+    this->treeSize++;
   } else {
-    while (now != NULL) {
-      if (now->pack.first <= addedN->pack.first) {
-        if (now->right == NULL) {
-          now->right = addedN;
-          return;
-        } else {
-          now = now->right;
-        }
-      }
-      if (now->pack.first > addedN->pack.first) {
-        if (now->left == NULL) {
-          now->left = addedN;
-          return;
-        } else {
-          now = now->left;
-        }
-      }
+    if (_pack.first > node->element.first) {
+      add(node->right, _pack);
+    } else {
+      add(node->left, _pack);
     }
   }
 }
 
 template <typename message>
 void Tree<message>::p_sort() {
-  Tree *now = this;
+  Node *tmp = new Node;
+  tmp = root;
   std::cout << "Sorted message: \n";
   std::cout << "Ordinal number: \t Massage: \n";
-  for (uint32_t i = 0; i < quantity; ++i) {
-    now = this;
-    while (now->pack.first != i + 1) {
-      if (now->pack.first < i + 1) {
-        now = now->right;
+  for (uint32_t i = 1; i < treeSize; ++i) {
+    while (tmp->element.first != i) {
+      if (tmp->element.first < i) {
+        tmp = tmp->right;
       } else {
-        now = now->left;
+        tmp = tmp->left;
       }
     }
-    std::cout << now->pack.first << "\t" << now->pack.second << std::endl;
+    std::cout << tmp->element.first << "\t" << tmp->element.second << std::endl;
   }
 }
