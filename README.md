@@ -16,4 +16,4 @@ Poniżej znajdują się informacje do poszczególnych zadań.
 - [ ] Realizowane zadanie - zadanie na ocene 5.0
 - [ ] Ocena - [NULL]
 
-PDF z listą zadań znajduje się w katalogu
+[PDF z listą zadań](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/proj1.pdf)
