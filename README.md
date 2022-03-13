@@ -1,16 +1,8 @@
-# PAMSI-2022
+# PROJECT 1
 
 
 
-## Getting started
-
-Repository created to store projects created during "Algorithm design and AI methods" project classes at Wroclaw University of Science and Technology.
-
-Information for each task can be found below:
-## Zadania
-- [ ] [Project 1](#Project-1)
-
-## Project 1
+## Informational details of the task 
 
 - [ ] Deadline for the commissioning of the task : 04/04/2022
 - [ ] A task that will be implemented  - task for assessment: 5.0
