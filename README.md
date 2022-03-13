@@ -6,7 +6,7 @@
 
 Repository created to store projects created during "Algorithm design and AI methods" project classes at Wroclaw University of Science and Technology.
 
-Below information for each task can be found:
+Information for each task can be found below:
 ## Zadania
 - [ ] [Project 1](#Project-1)
 
