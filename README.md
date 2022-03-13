@@ -8,7 +8,7 @@ Repository created to store projects created during "Algorithm design and AI met
 
 Below information for each task can be found:
 ## Zadania
-- [ ] [Project 1](#Project-1)
+- [ ] [Project 1](https://gitlab.com/JasinskiR259384/pamsi-2022/-/tree/dev1.0)
 
 ## Project 1
 
