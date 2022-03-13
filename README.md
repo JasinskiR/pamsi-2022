@@ -16,4 +16,4 @@ Below information for each task can be found:
 - [ ] A task that will be implemented  - task for assessment: 5.0
 - [ ] Final assessment of the task  - [NULL]
 
-[pdf with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/proj1.pdf)
+[PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/proj1.pdf)
