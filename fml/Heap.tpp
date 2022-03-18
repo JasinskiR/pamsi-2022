@@ -2,6 +2,11 @@
 #include "climits"
 
 template <typename message>
+Heap<message>::Heap(std::vector<std::pair<uint32_t, message>> _pack) {
+  addPackets(_pack);
+}
+
+template <typename message>
 void Heap<message>::addPackets(
     std::vector<std::pair<uint32_t, message>> _pack) {
   packetTab = new std::pair<uint32_t, message>[2];
@@ -79,4 +84,16 @@ void Heap<message>::resize() {
 template <typename message>
 uint32_t Heap<message>::getSize() {
   return size;
+}
+
+template <typename message>
+void Heap<message>::print() {
+  std::cout << "Sorted message: \n";
+  std::cout << "Ordinal no.: Massage: \n";
+  while (getSize() > 0) {
+    std::pair<uint32_t, uint32_t> tmp;
+    tmp = minValue();
+    pop();
+    std::cout << tmp.first << "\t \t" << tmp.second << std::endl;
+  }
 }
