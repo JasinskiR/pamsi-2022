@@ -1,19 +1,11 @@
-# PAMSI-2022
+# PROJECT 1
 
 
 
-## Getting started
+## Informational details of the task 
 
-Publiczne repozytorium dla projektu PAMSI (Projektowanie algorytmów i metody sztucznej inteligencji)
+- [ ] Deadline for the commissioning of the task : 04/04/2022
+- [ ] A task that will be implemented  - task for assessment: 5.0
+- [ ] Final assessment of the task  - [NULL]
 
-Poniżej znajdują się informacje do poszczególnych zadań.
-## Zadania
-- [ ] [Zadanie 1](#Zadanie-1)
-
-## Zadanie 1
-
-- [ ] Termin oddania zadania: 04.04.2022
-- [ ] Realizowane zadanie - zadanie na ocene 5.0
-- [ ] Ocena - [NULL]
-
-PDF z listą zadań znajduje się w katalogu
+[PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/proj1.pdf)
