@@ -62,7 +62,6 @@ void Tree<message>::p_sort() {
       } else {
         tmp = tmp->left;
       }
-      assert(tmp != nullptr);
     }
     std::cout << tmp->element.first << "\t" << tmp->element.second << std::endl;
   }

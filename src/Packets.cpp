@@ -3,7 +3,7 @@
 template <>
 Packets<uint32_t>::Packets(uint32_t _packetNo) : packetNo(_packetNo) {
   for (uint32_t i = 0; i < packetNo; ++i) {
-    packetTab.push_back(std::make_pair(i + 1, i + 1));  // iterator of messages
+    packetTab.push_back(std::make_pair(i + 1, packetNo - i));  // iterator of messages
   }
   shuffle();
 }
