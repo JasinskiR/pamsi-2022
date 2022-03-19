@@ -15,6 +15,7 @@ void Heap<message>::addPackets(
   for (auto const &packet : _pack) {
     insertKey(packet);
   }
+  print();
 }
 
 template <typename message>
@@ -91,9 +92,9 @@ void Heap<message>::print() {
   std::cout << "Sorted message: \n";
   std::cout << "Ordinal no.: Massage: \n";
   while (getSize() > 0) {
-    std::pair<uint32_t, uint32_t> tmp;
+    std::pair<uint32_t, message> tmp;
     tmp = minValue();
     pop();
-    std::cout << tmp.first << "\t \t" << tmp.second << std::endl;
+    std::cout << tmp.first << "\t" << tmp.second << std::endl;
   }
 }
