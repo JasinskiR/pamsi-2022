@@ -1,5 +1,7 @@
 #include "Heap.hpp"
 #include "climits"
+#include "cstdio"
+#include "fstream"
 
 template <typename message>
 Heap<message>::Heap(std::vector<std::pair<uint32_t, message>> _pack) {
@@ -89,12 +91,51 @@ uint32_t Heap<message>::getSize() {
 
 template <typename message>
 void Heap<message>::print() {
-  std::cout << "Sorted message: \n";
-  std::cout << "Ordinal no.: Massage: \n";
-  while (getSize() > 0) {
-    std::pair<uint32_t, message> tmp;
-    tmp = minValue();
-    pop();
-    std::cout << tmp.first << "\t" << tmp.second << std::endl;
+  if (size <= 100) {
+    std::cout << "Sorted message: \n";
+    std::cout << "Ordinal no.: Massage: \n";
+    while (getSize() > 0) {
+      std::pair<uint32_t, message> tmp;
+      tmp = minValue();
+      pop();
+      std::cout << tmp.first << "\t" << tmp.second << std::endl;
+    }
+  } else {
+    std::cout << "The input file has more than 100 lines. It will be send to "
+                 "\"Sorted.txt\" file"
+              << std::endl;
+    std::cout << "Do you want to continue ? [y/n]: ";
+    char choice;
+    while (true) {
+      std::cin >> choice;
+      if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+        std::cout << "Option selection error. Try again: " << std::endl;
+        continue;
+      } else
+        break;
+    }
+    if (choice == 'n' || choice == 'N') {
+      std::cerr << "The action has been stopped. Quitting the program..."
+                << std::endl;
+    }
+    std::ofstream newFile;
+    std::string fileName = "Sorted.txt";
+    newFile.open(fileName);
+    if (newFile.good()) {
+      newFile << "Sorted message: \n";
+      newFile << "Ordinal no.: Massage: \n";
+      while (getSize() > 0) {
+        std::pair<uint32_t, message> tmp;
+        tmp = minValue();
+        pop();
+        newFile << tmp.first << tmp.second << std::endl;
+      }
+      std::cout << "File has been created" << std::endl;
+    }
+    else
+    throw std::runtime_error("The file " + fileName +
+                                " could not be created!");
   }
 }
