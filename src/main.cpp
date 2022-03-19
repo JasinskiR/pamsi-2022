@@ -36,8 +36,8 @@ int main() {
     switch (choice) {
       case 1: {
         uint32_t packetNo;
-        cin >> packetNo;
         cout << "Enter the number of packets : ";
+        cin >> packetNo;
         Packets<uint32_t> packets(packetNo);
         Heap<uint32_t> heap(packets.packetTab);
         status = false;
