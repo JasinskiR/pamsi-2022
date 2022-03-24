@@ -17,7 +17,6 @@ void Heap<message>::addPackets(
   for (auto const &packet : _pack) {
     insertKey(packet);
   }
-  print();
 }
 
 template <typename message>
@@ -91,20 +90,14 @@ uint32_t Heap<message>::getSize() {
 
 template <typename message>
 void Heap<message>::print() {
-  if (size <= 100) {
-    std::cout << "Sorted message: \n";
-    std::cout << "Ordinal no.: Massage: \n";
-    while (getSize() > 0) {
-      std::pair<uint32_t, message> tmp;
-      tmp = minValue();
-      pop();
-      std::cout << tmp.first << "\t" << tmp.second << std::endl;
-    }
-  } else {
-    std::cout << "The input file has more than 100 lines. It will be send to "
-                 "\"Sorted.txt\" file"
+  bool status = true;
+  while (status) {
+    std::cout << "\nThe message has " << size
+              << "lines.\nIt can be printed out or saved to file."
               << std::endl;
-    std::cout << "Do you want to continue ? [y/n]: ";
+    std::cout << "P - print the message out\n";
+    std::cout << "S - save message to file\n";
+    std::cout << "Your choice: ";
     char choice;
     while (true) {
       std::cin >> choice;
@@ -116,26 +109,48 @@ void Heap<message>::print() {
       } else
         break;
     }
-    if (choice == 'n' || choice == 'N') {
-      std::cerr << "The action has been stopped. Quitting the program..."
-                << std::endl;
-    }
-    std::ofstream newFile;
-    std::string fileName = "Sorted.txt";
-    newFile.open(fileName);
-    if (newFile.good()) {
-      newFile << "Sorted message: \n";
-      newFile << "Ordinal no.: Massage: \n";
-      while (getSize() > 0) {
-        std::pair<uint32_t, message> tmp;
-        tmp = minValue();
-        pop();
-        newFile << tmp.first << tmp.second << std::endl;
+    switch (choice) {
+      case 'p':
+      case 'P': {
+        std::cout << "Sorted message: \n";
+        std::cout << "Ordinal no.: Massage: \n";
+        while (getSize() > 0) {
+          std::pair<uint32_t, message> tmp;
+          tmp = minValue();
+          pop();
+          std::cout << tmp.first << "\t" << tmp.second << std::endl;
+        }
+        status = false;
+        break;
       }
-      std::cout << "File has been created" << std::endl;
+      case 's':
+      case 'S': {
+        std::cout << "It will be send to \"Sorted.txt\" file" << std::endl;
+        std::ofstream newFile;
+        std::string fileName = "Sorted.txt";
+        newFile.open(fileName);
+        if (newFile.good()) {
+          newFile << "Sorted message: \n";
+          newFile << "Ordinal no.: Massage: \n";
+          while (getSize() > 0) {
+            std::pair<uint32_t, message> tmp;
+            tmp = minValue();
+            pop();
+            newFile << tmp.first << " " << tmp.second << std::endl;
+          }
+          std::cout << "File has been created or has been overwritten!"
+                    << std::endl;
+        } else
+          throw std::runtime_error("The file " + fileName +
+                                   " could not be created!");
+        status = false;
+        break;
+      }
+      default: {
+        std::cout << "Unrecognized option !" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+      }
     }
-    else
-    throw std::runtime_error("The file " + fileName +
-                                " could not be created!");
   }
 }

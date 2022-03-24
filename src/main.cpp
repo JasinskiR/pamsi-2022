@@ -40,12 +40,14 @@ int main() {
         cin >> packetNo;
         Packets<uint32_t> packets(packetNo);
         Heap<uint32_t> heap(packets.packetTab);
+        heap.print();
         status = false;
         break;
       }
       case 2: {
         Packets<string> packets;
         Heap<string> heap(packets.packetTab);
+        heap.print();
         status = false;
         break;
       }
@@ -61,4 +63,5 @@ int main() {
       }
     }
   }
+  cout << "Quitting the program..." << endl;
 }
