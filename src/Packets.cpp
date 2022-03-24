@@ -34,7 +34,6 @@ Packets<std::string>::Packets() {
     throw std::invalid_argument("The file " + fileName +
                                 "was not opened properly or the " + fileName +
                                 "does not exist!");
-  shuffle();
 }
 
 template <typename message>
