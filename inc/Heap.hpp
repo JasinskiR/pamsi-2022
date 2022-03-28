@@ -9,7 +9,7 @@ class Heap {
  private:
   uint32_t sizeOfTab{};
   uint32_t size{};
-  std::pair<uint32_t, message> *packetTab;
+  std::pair<uint32_t, message> *packetArr;
   void addPackets(std::vector<std::pair<uint32_t, message>> _pack);
   void heapify(uint32_t node);
   std::pair<uint32_t, message> minValue();

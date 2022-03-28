@@ -3,7 +3,7 @@
 template <>
 Packets<uint32_t>::Packets(uint32_t _packetNo) : packetNo(_packetNo) {
   for (uint32_t i = 0; i < packetNo; ++i) {
-    packetTab.push_back(
+    packetArr.push_back(
         std::make_pair(i + 1, packetNo - i));  // iterator of messages
   }
   shuffle();
@@ -26,7 +26,7 @@ Packets<std::string>::Packets() {
     while (!file.eof()) {
       if (file >> tmpFirst) {
         if (getline(file, tmpSecond))
-          packetTab.push_back(
+          packetArr.push_back(
               std::make_pair(std::stoul(tmpFirst, nullptr, 0), tmpSecond));
       }
     }
@@ -40,7 +40,7 @@ template <typename message>
 void Packets<message>::shuffle() {
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   std::default_random_engine rng(seed);
-  std::shuffle(packetTab.begin(), packetTab.end(), rng);
+  std::shuffle(packetArr.begin(), packetArr.end(), rng);
 }
 
 template class Packets<uint32_t>;

@@ -15,7 +15,7 @@ class Packets {
   void shuffle();
 
  public:
-  std::vector<std::pair<uint32_t, message>> packetTab;
+  std::vector<std::pair<uint32_t, message>> packetArr;
   Packets(uint32_t _packetNo);
   Packets();
 };

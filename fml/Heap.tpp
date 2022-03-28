@@ -11,8 +11,7 @@ Heap<message>::Heap(std::vector<std::pair<uint32_t, message>> _pack) {
 template <typename message>
 void Heap<message>::addPackets(
     std::vector<std::pair<uint32_t, message>> _pack) {
-  packetTab = new std::pair<uint32_t, message>[2];
-  // sizeOfMessages = *(&packetTab + 1) - packetTab - 1;  // pointer arithmetic
+  packetArr = new std::pair<uint32_t, message>[2];
   sizeOfTab = 2;
   for (auto const &packet : _pack) {
     insertKey(packet);
@@ -22,43 +21,43 @@ void Heap<message>::addPackets(
 template <typename message>
 void Heap<message>::heapify(uint32_t node) {
   // node in that function is an element which we have added
-  if (node == 1 || packetTab[node / 2] < packetTab[node]) return;
-  swap(packetTab[node / 2], packetTab[node]);
+  if (node == 1 || packetArr[node / 2] < packetArr[node]) return;
+  swap(packetArr[node / 2], packetArr[node]);
   heapify(node / 2);
 }
 
 template <typename message>
 std::pair<uint32_t, message> Heap<message>::minValue() {
-  return packetTab[1];
+  return packetArr[1];
 }
 
 template <typename message>
 void Heap<message>::pushDown(uint32_t node) {
   if (node * 2 > size) return;
   if (node * 2 + 1 > size) {
-    if (packetTab[node * 2] < packetTab[node]) {
-      swap(packetTab[node], packetTab[node * 2]);
+    if (packetArr[node * 2] < packetArr[node]) {
+      swap(packetArr[node], packetArr[node * 2]);
       this->pushDown(node * 2);
     }
     return;
   }
-  if (packetTab[node * 2] < packetTab[node * 2 + 1]) {
-    if (packetTab[node * 2] < packetTab[node]) {
-      swap(packetTab[node], packetTab[node * 2]);
+  if (packetArr[node * 2] < packetArr[node * 2 + 1]) {
+    if (packetArr[node * 2] < packetArr[node]) {
+      swap(packetArr[node], packetArr[node * 2]);
       this->pushDown(node * 2);
     }
     return;
   }
-  if (packetTab[node * 2 + 1] < packetTab[node]) {
-    swap(packetTab[node], packetTab[node * 2 + 1]);
+  if (packetArr[node * 2 + 1] < packetArr[node]) {
+    swap(packetArr[node], packetArr[node * 2 + 1]);
     this->pushDown(node * 2 + 1);
   }
 }
 
 template <typename message>
 void Heap<message>::pop() {
-  swap(packetTab[1], packetTab[size]);
-  packetTab[size--] = std::make_pair(NULL, NULL);
+  swap(packetArr[1], packetArr[size]);
+  packetArr[size--] = std::make_pair(NULL, NULL);
   this->pushDown(1);
 }
 
@@ -68,7 +67,7 @@ void Heap<message>::insertKey(std::pair<uint32_t, message> element) {
     sizeOfTab *= 2;
     resize();
   }
-  packetTab[++size] = element;
+  packetArr[++size] = element;
   heapify(size);
 }
 
@@ -77,10 +76,10 @@ void Heap<message>::resize() {
   std::pair<uint32_t, message> *tmp =
       new std::pair<uint32_t, message>[sizeOfTab];
   for (uint32_t i = 0; i <= size; ++i) {
-    tmp[i] = packetTab[i];
+    tmp[i] = packetArr[i];
   }
-  delete[] packetTab;
-  packetTab = tmp;
+  delete[] packetArr;
+  packetArr = tmp;
 }
 
 template <typename message>

@@ -39,14 +39,14 @@ int main() {
         cout << "Enter the number of packets : ";
         cin >> packetNo;
         Packets<uint32_t> packets(packetNo);
-        Heap<uint32_t> heap(packets.packetTab);
+        Heap<uint32_t> heap(packets.packetArr);
         heap.print();
         status = false;
         break;
       }
       case 2: {
         Packets<string> packets;
-        Heap<string> heap(packets.packetTab);
+        Heap<string> heap(packets.packetArr);
         heap.print();
         status = false;
         break;
