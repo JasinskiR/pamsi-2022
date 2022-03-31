@@ -92,7 +92,7 @@ void Heap<message>::print() {
   bool status = true;
   while (status) {
     std::cout << "\nThe message has " << size
-              << "lines.\nIt can be printed out or saved to file."
+              << " lines.\nIt can be printed out or saved to file."
               << std::endl;
     std::cout << "P - print the message out\n";
     std::cout << "S - save message to file\n";

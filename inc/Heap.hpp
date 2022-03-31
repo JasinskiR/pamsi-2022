@@ -2,6 +2,7 @@
 #define HEAP_HPP
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 template <typename message>

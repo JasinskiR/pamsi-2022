@@ -32,7 +32,7 @@ Packets<std::string>::Packets() {
     }
   } else
     throw std::invalid_argument("The file " + fileName +
-                                "was not opened properly or the " + fileName +
+                                " was not opened properly or the " + fileName +
                                 "does not exist!");
 }
 
