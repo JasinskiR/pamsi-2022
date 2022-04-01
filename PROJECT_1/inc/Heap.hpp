@@ -13,7 +13,7 @@ class Heap {
   std::pair<uint32_t, message> *packetArr;
 
   /**
-   * @brief Method which is resbonsible for aadding packets to structure
+   * @brief Method which is resbonsible for adding packets to structure
    *
    * @param _pack  - vector of packets with messages
    */
