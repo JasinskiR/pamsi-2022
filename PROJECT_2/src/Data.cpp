@@ -17,7 +17,7 @@ void Data::readFile() {
   std::cout << std::setprecision(1) << std::fixed;
   int i = 0;
   while (!file.eof()) {
-    // while (i != 400000) {
+    // while (i != 100000) {
     if (!getline(file, tmp)) continue;
 
     if (tmp.size() == 0) continue;
@@ -39,6 +39,4 @@ void Data::readFile() {
       movies.push_back(movie);
     }
   }
-  std::cout << i << std::endl;
-  exit(0);
 }

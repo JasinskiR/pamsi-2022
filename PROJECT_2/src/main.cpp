@@ -13,7 +13,7 @@ int main() {
   Data records;
   bool status = true;
   while (status) {
-    system("clear");
+    //system("clear");
     cout << "MENU" << endl;
     cout << "1. Choose file" << endl;
     cout << "2. Sort" << endl;
