@@ -5,7 +5,7 @@ using namespace std;
 #include <bits/stdc++.h>
 
 Film magic5(std::vector<Film> movieList, int low, int high) {
-  if (high - low <= 50) {
+  if (high - low <= 5) {
     for (int k = low; k < high; ++k) {
       for (int l = k + 1; l <= high; ++l) {
         if (movieList[k].getRating() > movieList[l].getRating())
