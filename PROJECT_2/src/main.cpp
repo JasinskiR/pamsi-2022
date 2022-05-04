@@ -5,6 +5,7 @@
 
 #include "BinSort.hpp"
 #include "Data.hpp"
+#include "MergeSort.hpp"
 #include "QuickSort.hpp"
 
 using namespace std;
@@ -13,6 +14,7 @@ void wait4key();
 int main() {
   Data records;
   bool status = true;
+  bool statusAlg = true;
   while (status) {
     // system("clear");
     cout << "MENU" << endl;
@@ -40,7 +42,48 @@ int main() {
         break;
       }
       case 2: {
-        binSort(records.getMovies());
+        while (statusAlg) {
+          cout << "Choose sorting algorithm" << endl;
+          cout << "1. Quick Sort" << endl;
+          cout << "2. Bin/Bucket Sort" << endl;
+          cout << "3. Merge Sort" << endl;
+          cout << "Enter the number of the option: ";
+          int algorithm;
+          while (true) {
+            cin >> algorithm;
+            if (!cin.good()) {
+              cin.clear();
+              cin.ignore(std::numeric_limits<int>::max(), '\n');
+              cout << "Option selection error. Try again: " << endl;
+              continue;
+            } else
+              break;
+          }
+          switch (algorithm) {
+            case 1: {
+              statusAlg = false;
+              quickSort(records.getMovies());
+              break;
+            }
+            case 2: {
+              statusAlg = false;
+              binSort(records.getMovies());
+              break;
+            }
+            case 3: {
+              statusAlg = false;
+              mergeSort(records.getMovies());
+              break;
+            }
+
+            default: {
+              cout << "Unrecognized option !" << endl;
+              cin.clear();
+              cin.ignore(std::numeric_limits<int>::max(), '\n');
+              wait4key();
+            }
+          }
+        }
         break;
       }
       case 0: {

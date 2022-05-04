@@ -3,13 +3,13 @@ CXXFLAGS=-g -Iinc -Isrc -Ifml -Wall -pedantic -std=c++17
 # __start__: MessagesP
 # 	./MessagesP
 
-Ranking: obj obj/main.o obj/Data.o obj/QuickSort.o obj/Film.o obj/BinSort.o
-	g++ -Wall -pedantic -std=c++0x -o Ranking obj/main.o obj/Data.o obj/QuickSort.o obj/Film.o obj/BinSort.o
+Ranking: obj obj/main.o obj/Data.o obj/QuickSort.o obj/Film.o obj/BinSort.o obj/MergeSort.o
+	g++ -Wall -pedantic -std=c++0x -o Ranking obj/main.o obj/Data.o obj/QuickSort.o obj/Film.o obj/BinSort.o obj/MergeSort.o
 
 obj:
 	mkdir obj
 
-obj/main.o: src/main.cpp inc/Data.hpp inc/QuickSort.hpp inc/BinSort.hpp
+obj/main.o: src/main.cpp inc/Data.hpp inc/QuickSort.hpp inc/BinSort.hpp inc/MergeSort.hpp
 	g++ -c ${CXXFLAGS} -o obj/main.o src/main.cpp 
 
 obj/Data.o: src/Data.cpp inc/Data.hpp
@@ -23,6 +23,9 @@ obj/Film.o: src/Film.cpp inc/Film.hpp
 
 obj/BinSort.o: src/BinSort.cpp inc/BinSort.hpp
 	g++ -c ${CXXFLAGS} -o obj/BinSort.o src/BinSort.cpp	
+
+obj/MergeSort.o: src/MergeSort.cpp inc/MergeSort.hpp
+	g++ -c ${CXXFLAGS} -o obj/MergeSort.o src/MergeSort.cpp
 
 clean:
 	rm -f obj/*.o MessagesP

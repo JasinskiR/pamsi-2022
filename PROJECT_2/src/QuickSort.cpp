@@ -1,8 +1,9 @@
 #include "QuickSort.hpp"
 using namespace std;
 
-#include <algorithm>
 #include <bits/stdc++.h>
+
+#include <algorithm>
 
 Film magic5(std::vector<Film> movieList, int low, int high) {
   if (high - low <= 5) {
@@ -61,10 +62,10 @@ void qSort(std::vector<Film>& movieList, int low, int high) {
 void quickSort(std::vector<Film> movies) {
   std::vector<Film> tmp = movies;
   qSort(tmp, 0, (int)tmp.size() - 1);
-  saveToFile(tmp);
+  saveToFileQ(tmp);
 }
 
-void saveToFile(std::vector<Film> movies) {
+void saveToFileQ(std::vector<Film> movies) {
   std::cout << "Sorted movies will be send to \"QSorted.txt\" file"
             << std::endl;
   std::ofstream newFile;
