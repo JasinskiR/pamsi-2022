@@ -12,14 +12,17 @@ using namespace std;
 void wait4key();
 
 int main() {
-  Data records;
+  Data<vector<Film>> records;
   bool status = true;
   bool statusAlg = true;
+  bool dataRead = false;
+  uint64_t number = records.getNumber();
   while (status) {
-    // system("clear");
+    system("clear");
     cout << "MENU" << endl;
     cout << "1. Choose file" << endl;
     cout << "2. Sort" << endl;
+    cout << "3. Set number of records to be sorted" << endl;
     cout << "0. Exit an app" << endl;
     cout << "Enter the number of the option: ";
     int choice;
@@ -36,12 +39,19 @@ int main() {
     switch (choice) {
       case 1: {
         records.readFile();
+        dataRead = true;
         cin.clear();
         cin.ignore(std::numeric_limits<int>::max(), '\n');
         wait4key();
         break;
       }
       case 2: {
+        if (!dataRead) {
+          cout << "\n Data were not read from file. Nothing can be sort!"
+               << endl;
+          wait4key();
+          break;
+        }
         while (statusAlg) {
           cout << "Choose sorting algorithm" << endl;
           cout << "1. Quick Sort" << endl;
@@ -62,17 +72,17 @@ int main() {
           switch (algorithm) {
             case 1: {
               statusAlg = false;
-              quickSort(records.getMovies());
+              quickSort(records.getMovies(), number);
               break;
             }
             case 2: {
               statusAlg = false;
-              binSort(records.getMovies());
+              binSort(records.getMovies(), number);
               break;
             }
             case 3: {
               statusAlg = false;
-              mergeSort(records.getMovies());
+              mergeSort(records.getMovies(), number);
               break;
             }
 
@@ -83,6 +93,25 @@ int main() {
               wait4key();
             }
           }
+        }
+        statusAlg = true;
+        cin.clear();
+        cin.ignore(std::numeric_limits<int>::max(), '\n');
+        wait4key();
+        break;
+      }
+      case 3: {
+        cout << "Number of movies: " << records.getNumber() << endl;
+        cout << "Enter the new amount of movies to sort: ";
+        while (true) {
+          cin >> number;
+          if (!cin.good() || number <= 0 || number > records.getNumber()) {
+            cin.clear();
+            cin.ignore(std::numeric_limits<int>::max(), '\n');
+            cout << "Input number error. Try again: " << endl;
+            continue;
+          } else
+            break;
         }
         break;
       }

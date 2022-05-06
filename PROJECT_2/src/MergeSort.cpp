@@ -19,14 +19,14 @@ void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
   for (i = low; i <= high; i++) movieList[i] = tmp[i];
 }
 
-void mergeSort(std::vector<Film> movies) {
+void mergeSort(std::vector<Film> movies, uint64_t number) {
   vector<Film> tmp = movies;
   vector<vector<Film>> movieByRate(10);
-  mSort(movies, tmp, 0, (int)tmp.size() - 1);
-  saveToFile(tmp);
+  mSort(movies, tmp, 0, number - 1);
+  saveToFile(tmp, number);
 }
 
-void saveToFile(std::vector<Film> movies) {
+void saveToFile(std::vector<Film> movies, uint64_t number) {
   std::cout << "Sorted movies will be send to \"MSorted.txt\" file"
             << std::endl;
   std::ofstream newFile;
@@ -35,9 +35,8 @@ void saveToFile(std::vector<Film> movies) {
   if (newFile.good()) {
     newFile << "Sorted movies: \n";
     newFile << "Ordinal no.: Title Rating: \n";
-    for (auto element : movies) {
-      newFile << element.getOrdNo() << " " << element.getTitle() << " "
-              << element.getRating() << std::endl;
+    for (uint64_t element = 0; element < number; ++element) {
+      newFile << movies[element];
     }
     std::cout << "File has been created or has been overwritten!" << std::endl;
   } else

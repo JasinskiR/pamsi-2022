@@ -16,13 +16,14 @@ class Film {
 
  public:
   Film(){};
-  uint64_t getOrdNo() { return ordinalNo; };
-  float getRating() { return rating; };
-  std::string getTitle() { return title; };
+  uint64_t getOrdNo() const { return ordinalNo; };
+  float getRating() const { return rating; };
+  std::string getTitle() const { return title; };
   void setOrdNo(uint64_t _ordinalNo) { ordinalNo = _ordinalNo; };
   void setTitle(std::string _title) { title = _title; };
   void setRating(float _rating) { rating = _rating; };
   bool operator<(Film other) { return this->rating < other.rating; }
 };
 
+std::ostream &operator<<(std::ostream &stream, const Film &movie);
 #endif

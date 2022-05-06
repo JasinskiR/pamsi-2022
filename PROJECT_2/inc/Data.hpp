@@ -9,13 +9,16 @@
 #include "Film.hpp"
 
 //  ordinal no. ; title ; year ; rating
+template <typename data2Sort>
 class Data {
  private:
   std::vector<Film> movies;
+  uint64_t numberOfMovies{};
 
  public:
   void readFile();
   std::vector<Film> getMovies() { return movies; };
+  uint64_t getNumber() { return numberOfMovies; };
 };
 
 #endif

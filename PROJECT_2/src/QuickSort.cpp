@@ -59,13 +59,13 @@ void qSort(std::vector<Film>& movieList, int low, int high) {
   if (sameRate < high) qSort(movieList, sameRate, high);
 }
 
-void quickSort(std::vector<Film> movies) {
+void quickSort(std::vector<Film> movies, uint64_t number) {
   std::vector<Film> tmp = movies;
-  qSort(tmp, 0, (int)tmp.size() - 1);
-  saveToFileQ(tmp);
+  qSort(tmp, 0, number - 1);
+  saveToFileQ(tmp, number);
 }
 
-void saveToFileQ(std::vector<Film> movies) {
+void saveToFileQ(std::vector<Film> movies, uint64_t number) {
   std::cout << "Sorted movies will be send to \"QSorted.txt\" file"
             << std::endl;
   std::ofstream newFile;
@@ -74,9 +74,8 @@ void saveToFileQ(std::vector<Film> movies) {
   if (newFile.good()) {
     newFile << "Sorted movies: \n";
     newFile << "Ordinal no.: Title Rating: \n";
-    for (auto element : movies) {
-      newFile << element.getOrdNo() << " " << element.getTitle() << " "
-              << element.getRating() << std::endl;
+    for (uint64_t element = 0; element < number; ++element) {
+      newFile << movies[element];
     }
     std::cout << "File has been created or has been overwritten!" << std::endl;
   } else

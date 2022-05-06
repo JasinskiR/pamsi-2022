@@ -1,20 +1,22 @@
 #include "BinSort.hpp"
 using namespace std;
 
-void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate) {
-  for (auto movie : movies) {
-    movieByRate[static_cast<int>(movie.getRating()) - 1].push_back(movie);
+void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
+           uint64_t number) {
+  for (uint64_t movie = 0; movie < number; ++movie) {
+    movieByRate[static_cast<int>(movies[movie].getRating()) - 1].push_back(
+        movies[movie]);
   }
 }
 
-void binSort(std::vector<Film> movies) {
+void binSort(std::vector<Film> movies, uint64_t number) {
   vector<Film> tmp = movies;
   vector<vector<Film>> movieByRate(10);
-  bSort(tmp, movieByRate);
-  saveToFile(movieByRate);
+  bSort(tmp, movieByRate, number);
+  saveToFile(movieByRate, number);
 }
 
-void saveToFile(vector<vector<Film>>& moviesByRate) {
+void saveToFile(vector<vector<Film>>& moviesByRate, uint64_t number) {
   std::cout << "Sorted movies will be send to \"BSorted.txt\" file"
             << std::endl;
   std::ofstream newFile;
@@ -23,10 +25,14 @@ void saveToFile(vector<vector<Film>>& moviesByRate) {
   if (newFile.good()) {
     newFile << "Sorted movies: \n";
     newFile << "Ordinal no.: Title Rating: \n";
+    uint64_t saved = 0;
     for (auto& movies : moviesByRate) {
-      for (auto& element : movies)
-        newFile << element.getOrdNo() << " " << element.getTitle() << " "
-                << element.getRating() << std::endl;
+      for (auto& element : movies) {
+        if (saved < number) {
+          newFile << element;
+          saved++;
+        }
+      }
     }
     std::cout << "File has been created or has been overwritten!" << std::endl;
   } else

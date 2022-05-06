@@ -5,7 +5,7 @@
 
 #include "Data.hpp"
 
-void mergeSort(std::vector<Film> movies);
+void mergeSort(std::vector<Film> movies, uint64_t number);
 void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low, int high);
-void saveToFile(std::vector<Film> tmp);
+void saveToFile(std::vector<Film> tmp, uint64_t number);
 #endif

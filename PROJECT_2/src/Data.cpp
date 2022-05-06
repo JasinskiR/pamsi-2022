@@ -1,6 +1,8 @@
 #include "Data.hpp"
 
-void Data::readFile() {
+
+template<>
+void Data<std::vector<Film>>::readFile() {
   std::string tmp;
   std::cout << "Enter a file name: ";
   std::string fileName;
@@ -15,7 +17,7 @@ void Data::readFile() {
   }
   Film movie;
   std::cout << std::setprecision(1) << std::fixed;
-  int i = 0;
+  
   while (!file.eof()) {
     // while (i != 100000) {
     if (!getline(file, tmp)) continue;
@@ -35,8 +37,10 @@ void Data::readFile() {
     if (ratingBegin != tmp.size()) {
       movie.setRating(
           std::stof(tmp.substr(ratingBegin, tmp.size() - ratingBegin)));
-      i++;
+      numberOfMovies++;
       movies.push_back(movie);
     }
   }
 }
+
+template class Data<std::vector<Film>>;
