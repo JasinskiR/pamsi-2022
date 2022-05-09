@@ -83,7 +83,6 @@ int main() {
             } else
               break;
           }
-          lines.filter2(number);
           switch (algorithm) {
             case 1: {
               statusAlg = false;

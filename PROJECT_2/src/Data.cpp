@@ -19,7 +19,7 @@ void Data::readFile() {
 
     lines.push_back(tmp);
   }
-  filter2(lines.size());
+  universalFilter(lines.size());
   allMovies = numberOfMovies;
 }
 
@@ -61,14 +61,15 @@ void Data::clear() {
   median = 0;
 }
 
-void Data::setMedian(std::vector<Film> tmp) {
-  median = getNumber() % 2 ? tmp[getNumber() / 2].getRating()
-                           : ((tmp[getNumber() / 2].getRating() +
-                               tmp[(getNumber() / 2) - 1].getRating()) /
-                              2);
+void Data::setMedian(std::vector<Film> tmp, uint64_t number) {
+  median =
+      number % 2
+          ? tmp[number / 2].getRating()
+          : ((tmp[number / 2].getRating() + tmp[(number / 2) - 1].getRating()) /
+             2);
 }
 
-void Data::filter2(uint64_t amount) {
+void Data::universalFilter(uint64_t amount) {
   clear();
   for (uint64_t i = 0; i < lines.size(); ++i) {
     addMovie(parser(lines.at(i)));

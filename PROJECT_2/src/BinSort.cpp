@@ -19,7 +19,7 @@ void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
       sorted.push_back(element);
     }
   }
-  records->setMedian(sorted);
+  records->setMedian(sorted, number);
   saveToFile(movieByRate, number);
 }
 

@@ -25,10 +25,11 @@ class Data {
   std::vector<Film> getMovies() { return movies; };
   uint64_t getNumber() { return numberOfMovies; };
   void filter(uint64_t amount);
-  void filter2(uint64_t amount);
-  float getAverageRating() { return (average / getNumber()); };
+  void universalFilter(uint64_t amount);
+  float getAverageRating() { return average; };
   float getMedian() { return median; };
-  void setMedian(std::vector<Film> toMedian);
+  void setMedian(std::vector<Film> toMedian, uint64_t number);
+  void setAverage(float _average) { average = _average; };
   std::vector<std::string> parser(std::string line);
   void addMovie(std::vector<std::string>);
 };

@@ -60,9 +60,16 @@ void qSort(std::vector<Film>& movieList, int low, int high) {
 }
 
 void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
-  std::vector<Film> tmp = movies;
-  qSort(tmp, 0, number - 1);
-  records->setMedian(tmp);
+  std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
+  qSort(tmp, 0, tmp.size() - 1);
+
+  records->setMedian(tmp, number);
+  records->setAverage(std::accumulate(tmp.begin(), tmp.end(), 0,
+                                      [](int i = 0, const Film& movie) {
+                                        return movie.getRating() + i;
+                                      }) /
+                      (float)number);
+
   saveToFileQ(tmp, number);
 }
 
