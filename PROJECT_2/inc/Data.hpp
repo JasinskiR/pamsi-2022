@@ -8,17 +8,29 @@
 
 #include "Film.hpp"
 
-//  ordinal no. ; title ; year ; rating
-template <typename data2Sort>
+//  ordinal no. ; title; rating
 class Data {
  private:
   std::vector<Film> movies;
+  std::vector<std::string> lines;
   uint64_t numberOfMovies{};
+  uint64_t allMovies{};
+  float average{};
+  float median{};
+  void clear();
 
  public:
+  uint64_t getAllMovies() { return allMovies; };
   void readFile();
   std::vector<Film> getMovies() { return movies; };
   uint64_t getNumber() { return numberOfMovies; };
+  void filter(uint64_t amount);
+  void filter2(uint64_t amount);
+  float getAverageRating() { return (average / getNumber()); };
+  float getMedian() { return median; };
+  void setMedian(std::vector<Film> toMedian);
+  std::vector<std::string> parser(std::string line);
+  void addMovie(std::vector<std::string>);
 };
 
 #endif

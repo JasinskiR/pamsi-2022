@@ -9,10 +9,17 @@ void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
   }
 }
 
-void binSort(std::vector<Film> movies, uint64_t number) {
-  vector<Film> tmp = movies;
+void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
+  vector<Film> tmp = movies, sorted;
   vector<vector<Film>> movieByRate(10);
   bSort(tmp, movieByRate, number);
+
+  for (auto& movies : movieByRate) {
+    for (auto& element : movies) {
+      sorted.push_back(element);
+    }
+  }
+  records->setMedian(sorted);
   saveToFile(movieByRate, number);
 }
 

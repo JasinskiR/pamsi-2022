@@ -59,9 +59,10 @@ void qSort(std::vector<Film>& movieList, int low, int high) {
   if (sameRate < high) qSort(movieList, sameRate, high);
 }
 
-void quickSort(std::vector<Film> movies, uint64_t number) {
+void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = movies;
   qSort(tmp, 0, number - 1);
+  records->setMedian(tmp);
   saveToFileQ(tmp, number);
 }
 

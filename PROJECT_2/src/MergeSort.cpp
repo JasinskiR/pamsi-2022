@@ -19,10 +19,11 @@ void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
   for (i = low; i <= high; i++) movieList[i] = tmp[i];
 }
 
-void mergeSort(std::vector<Film> movies, uint64_t number) {
+void mergeSort(std::vector<Film> movies, uint64_t number, Data* records) {
   vector<Film> tmp = movies;
   vector<vector<Film>> movieByRate(10);
   mSort(movies, tmp, 0, number - 1);
+  records->setMedian(tmp);
   saveToFile(tmp, number);
 }
 

@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <limits>
+#include <memory>
 #include <vector>
 
 #include "BinSort.hpp"
@@ -12,17 +13,17 @@ using namespace std;
 void wait4key();
 
 int main() {
-  Data<vector<Film>> records;
+  cout << std::setprecision(1) << std::fixed;
+  Data lines;
   bool status = true;
   bool statusAlg = true;
   bool dataRead = false;
-  uint64_t number = records.getNumber();
+  uint64_t number = lines.getNumber();
   while (status) {
     system("clear");
     cout << "MENU" << endl;
     cout << "1. Choose file" << endl;
     cout << "2. Sort" << endl;
-    cout << "3. Set number of records to be sorted" << endl;
     cout << "0. Exit an app" << endl;
     cout << "Enter the number of the option: ";
     int choice;
@@ -38,7 +39,7 @@ int main() {
     }
     switch (choice) {
       case 1: {
-        records.readFile();
+        lines.readFile();
         dataRead = true;
         cin.clear();
         cin.ignore(std::numeric_limits<int>::max(), '\n');
@@ -69,20 +70,34 @@ int main() {
             } else
               break;
           }
+
+          cout << "Number of movies: " << lines.getAllMovies() << endl;
+          cout << "Enter the amount of movies to sort: ";
+          while (true) {
+            cin >> number;
+            if (!cin.good() || number <= 0 || number > lines.getAllMovies()) {
+              cin.clear();
+              cin.ignore(std::numeric_limits<int>::max(), '\n');
+              cout << "Input number error. Try again: " << endl;
+              continue;
+            } else
+              break;
+          }
+          lines.filter2(number);
           switch (algorithm) {
             case 1: {
               statusAlg = false;
-              quickSort(records.getMovies(), number);
+              quickSort(lines.getMovies(), number, &lines);
               break;
             }
             case 2: {
               statusAlg = false;
-              binSort(records.getMovies(), number);
+              binSort(lines.getMovies(), number, &lines);
               break;
             }
             case 3: {
               statusAlg = false;
-              mergeSort(records.getMovies(), number);
+              mergeSort(lines.getMovies(), number, &lines);
               break;
             }
 
@@ -93,26 +108,14 @@ int main() {
               wait4key();
             }
           }
+          cout << "Average of rating: " << lines.getAverageRating() << endl;
+          cout << "Median of rating: " << lines.getMedian() << endl;
+          cout << "Time of sorting: " << endl;
         }
         statusAlg = true;
         cin.clear();
         cin.ignore(std::numeric_limits<int>::max(), '\n');
         wait4key();
-        break;
-      }
-      case 3: {
-        cout << "Number of movies: " << records.getNumber() << endl;
-        cout << "Enter the new amount of movies to sort: ";
-        while (true) {
-          cin >> number;
-          if (!cin.good() || number <= 0 || number > records.getNumber()) {
-            cin.clear();
-            cin.ignore(std::numeric_limits<int>::max(), '\n');
-            cout << "Input number error. Try again: " << endl;
-            continue;
-          } else
-            break;
-        }
         break;
       }
       case 0: {
