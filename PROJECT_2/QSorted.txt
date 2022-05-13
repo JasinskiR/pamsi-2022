@@ -1,5 +1,7 @@
 Sorted movies: 
 Ordinal no.: Title Rating: 
-14 Ruben ""Brandt"", Collector (2018) 7.0
-14 Ruben Brandt, Collector (2018) 7.0
-15 TYTUŁ 8.0
+186112,"Dragon Ball Z: Resurrection ""F"" (2015)",1.0
+185815,"Mugshots: Sammy ""The Bull"" Gravano - King Rat (2002) Season Unknown, Episode Unknown",4.0
+14,"Ruben ""Brandt"", Collector (2018)",5.0
+14,"Ruben Brandt, Collector (2018)",7.0
+15,TYTUŁ,8.0

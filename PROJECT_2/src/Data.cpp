@@ -1,6 +1,7 @@
 #include "Data.hpp"
 
 void Data::readFile() {
+  lines.erase(lines.begin(), lines.end());
   std::string tmp;
   std::cout << "Enter a file name: ";
   std::string fileName;
@@ -19,12 +20,13 @@ void Data::readFile() {
 
     lines.push_back(tmp);
   }
+  // filter(lines.size());
   universalFilter(lines.size());
   allMovies = numberOfMovies;
 }
 
 void Data::filter(uint64_t amount) {
-  clear();
+  clearVar();
   Film movie;
   for (uint64_t i = 0; i < lines.size(); ++i) {
     if (lines[i].size() == 0) continue;
@@ -54,7 +56,7 @@ void Data::filter(uint64_t amount) {
   }
 }
 
-void Data::clear() {
+void Data::clearVar() {
   movies.erase(movies.begin(), movies.end());
   numberOfMovies = 0;
   average = 0;
@@ -70,7 +72,7 @@ void Data::setMedian(std::vector<Film> tmp, uint64_t number) {
 }
 
 void Data::universalFilter(uint64_t amount) {
-  clear();
+  clearVar();
   for (uint64_t i = 0; i < lines.size(); ++i) {
     addMovie(parser(lines.at(i)));
   }
@@ -79,17 +81,22 @@ void Data::universalFilter(uint64_t amount) {
 std::vector<std::string> Data::parser(std::string line) {
   std::vector<std::string> parsedLine;
   std::string column;
+  std::string quoted;
 
   std::stringstream tmp(line);
   bool withQuote = false;
   std::string part = "";
   while (std::getline(tmp, column, ',')) {
-    auto position = column.find("\"");
-    if (position != std::string::npos) {
-      withQuote = !withQuote;
-      part += column.substr(0, position);
-      column = column.substr(position + 1, column.size());
-    }
+    std::stringstream quote(column);
+    do {
+      auto position = column.find("\"");
+      if (position != std::string::npos) {
+        withQuote = !withQuote;
+        part += column.substr(0, position + 1);
+        column = column.substr(position + 1, column.size());
+      }
+    } while (std::getline(quote, quoted, '\"'));
+
     if (!withQuote) {
       column += part;
       parsedLine.emplace_back(std::move(column));

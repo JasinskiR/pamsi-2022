@@ -1,4 +1,6 @@
 #include "BinSort.hpp"
+
+#include <bits/stdc++.h>
 using namespace std;
 
 void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
@@ -10,16 +12,22 @@ void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
 }
 
 void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
-  vector<Film> tmp = movies, sorted;
+  std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
+  std::vector<Film> sorted;
   vector<vector<Film>> movieByRate(10);
-  bSort(tmp, movieByRate, number);
+  bSort(tmp, movieByRate, tmp.size());
 
   for (auto& movies : movieByRate) {
     for (auto& element : movies) {
-      sorted.push_back(element);
+      sorted.emplace_back(element);
     }
   }
   records->setMedian(sorted, number);
+  records->setAverage(std::accumulate(sorted.begin(), sorted.end(), 0,
+                                      [](int i = 0, const Film& movie) {
+                                        return movie.getRating() + i;
+                                      }) /
+                      (float)number);
   saveToFile(movieByRate, number);
 }
 

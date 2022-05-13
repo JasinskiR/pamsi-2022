@@ -1,5 +1,8 @@
 #include "MergeSort.hpp"
 
+#include <bits/stdc++.h>
+
+#include <algorithm>
 using namespace std;
 
 void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
@@ -20,10 +23,15 @@ void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
 }
 
 void mergeSort(std::vector<Film> movies, uint64_t number, Data* records) {
-  vector<Film> tmp = movies;
+  std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
   vector<vector<Film>> movieByRate(10);
-  mSort(movies, tmp, 0, number - 1);
+  mSort(movies, tmp, 0, tmp.size() - 1);
   records->setMedian(tmp, number);
+  records->setAverage(std::accumulate(tmp.begin(), tmp.end(), 0,
+                                      [](int i = 0, const Film& movie) {
+                                        return movie.getRating() + i;
+                                      }) /
+                      (float)number);
   saveToFile(tmp, number);
 }
 

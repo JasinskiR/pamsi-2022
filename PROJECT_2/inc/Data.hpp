@@ -17,7 +17,7 @@ class Data {
   uint64_t allMovies{};
   float average{};
   float median{};
-  void clear();
+  void clearVar();
 
  public:
   uint64_t getAllMovies() { return allMovies; };
