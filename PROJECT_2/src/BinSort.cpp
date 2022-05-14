@@ -1,6 +1,5 @@
 #include "BinSort.hpp"
 
-#include <bits/stdc++.h>
 using namespace std;
 
 void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
@@ -15,7 +14,12 @@ void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
   std::vector<Film> sorted;
   vector<vector<Film>> movieByRate(10);
+
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  start = std::chrono::system_clock::now();
   bSort(tmp, movieByRate, tmp.size());
+  end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
 
   for (auto& movies : movieByRate) {
     for (auto& element : movies) {
@@ -23,33 +27,8 @@ void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
     }
   }
   records->setMedian(sorted, number);
-  records->setAverage(std::accumulate(sorted.begin(), sorted.end(), 0,
-                                      [](int i = 0, const Film& movie) {
-                                        return movie.getRating() + i;
-                                      }) /
-                      (float)number);
-  saveToFile(movieByRate, number);
-}
+  records->setAverage(tmp, number);
+  records->setTime(elapsed_seconds.count());
 
-void saveToFile(vector<vector<Film>>& moviesByRate, uint64_t number) {
-  std::cout << "Sorted movies will be send to \"BSorted.txt\" file"
-            << std::endl;
-  std::ofstream newFile;
-  std::string fileName = "BSorted.txt";
-  newFile.open(fileName);
-  if (newFile.good()) {
-    newFile << "Sorted movies: \n";
-    newFile << "Ordinal no.: Title Rating: \n";
-    uint64_t saved = 0;
-    for (auto& movies : moviesByRate) {
-      for (auto& element : movies) {
-        if (saved < number) {
-          newFile << element;
-          saved++;
-        }
-      }
-    }
-    std::cout << "File has been created or has been overwritten!" << std::endl;
-  } else
-    throw std::runtime_error("The file " + fileName + " could not be created!");
+  records->saveOrPrint(sorted, "BSorted.txt");
 }

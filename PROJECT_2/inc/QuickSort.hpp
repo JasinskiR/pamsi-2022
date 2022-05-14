@@ -8,5 +8,4 @@
 Film magic5(std::vector<Film> movieList, int low, int high);
 void qSort(std::vector<Film>& movieList, int low, int high);
 void quickSort(std::vector<Film> movies, uint64_t number, Data* records);
-void saveToFileQ(std::vector<Film> movies, uint64_t number);
 #endif

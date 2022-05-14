@@ -1,5 +1,7 @@
 #include "Data.hpp"
 
+#include <bits/stdc++.h>
+
 void Data::readFile() {
   lines.erase(lines.begin(), lines.end());
   std::string tmp;
@@ -70,7 +72,13 @@ void Data::setMedian(std::vector<Film> tmp, uint64_t number) {
           : ((tmp[number / 2].getRating() + tmp[(number / 2) - 1].getRating()) /
              2);
 }
-
+void Data::setAverage(std::vector<Film> tmp, uint64_t number) {
+  average = std::accumulate(tmp.begin(), tmp.end(), 0,
+                            [](int i = 0, const Film& movie) {
+                              return movie.getRating() + i;
+                            }) /
+            (float)number;
+}
 void Data::universalFilter(uint64_t amount) {
   clearVar();
   for (uint64_t i = 0; i < lines.size(); ++i) {
@@ -128,5 +136,71 @@ void Data::addMovie(std::vector<std::string> parsed) {
     }
     movies.emplace_back(movie);
     numberOfMovies++;
+  }
+}
+
+void Data::saveOrPrint(std::vector<Film> films, std::string fileName) {
+  std::cin.clear();
+  std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+  bool status = true;
+  while (status) {
+    std::cout << "What do you want to do ?\n";
+    std::cout << "P - print sorted movies out\n";
+    std::cout << "S - save sorted movies to file\n";
+    std::cout << "N - do not save or print\n";
+    std::cout << "Your choice: ";
+    char choice;
+    while (true) {
+      std::cin >> choice;
+      if (!std::cin.good()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+        std::cout << "Option selection error. Try again: " << std::endl;
+        continue;
+      } else
+        break;
+    }
+    switch (choice) {
+      case 'p':
+      case 'P': {
+        std::cout << "Sorted movies: \n";
+        std::cout << "Ordinal no.: Title: Rating: \n";
+        for (auto element : films) {
+          std::cout << element;
+        }
+        status = false;
+        break;
+      }
+      case 's':
+      case 'S': {
+        std::cout << "Sorted movies will be send to \"" << fileName << "\" file"
+                  << std::endl;
+        std::ofstream newFile;
+        newFile.open(fileName);
+        if (newFile.good()) {
+          newFile << "Sorted movies: \n";
+          newFile << "Ordinal no.: Title: Rating: \n";
+          for (auto element : films) {
+            newFile << element;
+          }
+          std::cout << "File has been created or has been overwritten!"
+                    << std::endl;
+        } else
+          throw std::runtime_error("The file " + fileName +
+                                   " could not be created!");
+        status = false;
+        break;
+      }
+      case 'n':
+      case 'N': {
+        status = false;
+        break;
+      }
+      default: {
+        std::cout << "Unrecognized option !" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+      }
+    }
   }
 }

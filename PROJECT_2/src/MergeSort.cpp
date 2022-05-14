@@ -1,7 +1,5 @@
 #include "MergeSort.hpp"
 
-#include <bits/stdc++.h>
-
 #include <algorithm>
 using namespace std;
 
@@ -25,29 +23,16 @@ void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
 void mergeSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
   vector<vector<Film>> movieByRate(10);
-  mSort(movies, tmp, 0, tmp.size() - 1);
-  records->setMedian(tmp, number);
-  records->setAverage(std::accumulate(tmp.begin(), tmp.end(), 0,
-                                      [](int i = 0, const Film& movie) {
-                                        return movie.getRating() + i;
-                                      }) /
-                      (float)number);
-  saveToFile(tmp, number);
-}
 
-void saveToFile(std::vector<Film> movies, uint64_t number) {
-  std::cout << "Sorted movies will be send to \"MSorted.txt\" file"
-            << std::endl;
-  std::ofstream newFile;
-  std::string fileName = "MSorted.txt";
-  newFile.open(fileName);
-  if (newFile.good()) {
-    newFile << "Sorted movies: \n";
-    newFile << "Ordinal no.: Title Rating: \n";
-    for (uint64_t element = 0; element < number; ++element) {
-      newFile << movies[element];
-    }
-    std::cout << "File has been created or has been overwritten!" << std::endl;
-  } else
-    throw std::runtime_error("The file " + fileName + " could not be created!");
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  start = std::chrono::system_clock::now();
+  mSort(movies, tmp, 0, tmp.size() - 1);
+  end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
+
+  records->setMedian(tmp, number);
+  records->setAverage(tmp, number);
+  records->setTime(elapsed_seconds.count());
+
+  records->saveOrPrint(tmp, "MSorted.txt");
 }

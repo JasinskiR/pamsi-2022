@@ -13,7 +13,6 @@ using namespace std;
 void wait4key();
 
 int main() {
-  cout << std::setprecision(1) << std::fixed;
   Data lines;
   bool status = true;
   bool statusAlg = true;
@@ -107,9 +106,11 @@ int main() {
               wait4key();
             }
           }
-          cout << "Average of rating: " << lines.getAverageRating() << endl;
+          cout << std::setprecision(1) << std::fixed;
+          cout << "\nAverage of rating: " << lines.getAverageRating() << endl;
           cout << "Median of rating: " << lines.getMedian() << endl;
-          cout << "Time of sorting: " << endl;
+          cout << std::setprecision(10) << std::fixed;
+          cout << "Time of sorting: " << lines.getTime() << endl;
         }
         statusAlg = true;
         cin.clear();

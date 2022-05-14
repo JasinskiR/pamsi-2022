@@ -1,8 +1,6 @@
 #include "QuickSort.hpp"
 using namespace std;
 
-#include <bits/stdc++.h>
-
 #include <algorithm>
 
 Film magic5(std::vector<Film> movieList, int low, int high) {
@@ -61,31 +59,16 @@ void qSort(std::vector<Film>& movieList, int low, int high) {
 
 void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
+
+  std::chrono::time_point<std::chrono::system_clock> start, end;
+  start = std::chrono::system_clock::now();
   qSort(tmp, 0, tmp.size() - 1);
+  end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
 
   records->setMedian(tmp, number);
-  records->setAverage(std::accumulate(tmp.begin(), tmp.end(), 0,
-                                      [](int i = 0, const Film& movie) {
-                                        return movie.getRating() + i;
-                                      }) /
-                      (float)number);
+  records->setAverage(tmp, number);
+  records->setTime(elapsed_seconds.count());
 
-  saveToFileQ(tmp, number);
-}
-
-void saveToFileQ(std::vector<Film> movies, uint64_t number) {
-  std::cout << "Sorted movies will be send to \"QSorted.txt\" file"
-            << std::endl;
-  std::ofstream newFile;
-  std::string fileName = "QSorted.txt";
-  newFile.open(fileName);
-  if (newFile.good()) {
-    newFile << "Sorted movies: \n";
-    newFile << "Ordinal no.: Title Rating: \n";
-    for (uint64_t element = 0; element < number; ++element) {
-      newFile << movies[element];
-    }
-    std::cout << "File has been created or has been overwritten!" << std::endl;
-  } else
-    throw std::runtime_error("The file " + fileName + " could not be created!");
+  records->saveOrPrint(tmp, "QSorted.txt");
 }

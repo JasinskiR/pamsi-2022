@@ -1,5 +1,6 @@
 #ifndef DATA_HPP
 #define DATA_HPP
+#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -18,20 +19,27 @@ class Data {
   float average{};
   float median{};
   void clearVar();
+  double time{};
 
  public:
-  uint64_t getAllMovies() { return allMovies; };
   void readFile();
-  std::vector<Film> getMovies() { return movies; };
-  uint64_t getNumber() { return numberOfMovies; };
+  void addMovie(std::vector<std::string>);
   void filter(uint64_t amount);
   void universalFilter(uint64_t amount);
+
+  uint64_t getAllMovies() { return allMovies; };
+  std::vector<Film> getMovies() { return movies; };
+  uint64_t getNumber() { return numberOfMovies; };
   float getAverageRating() { return average; };
   float getMedian() { return median; };
+  double getTime() { return time; };
+
   void setMedian(std::vector<Film> toMedian, uint64_t number);
-  void setAverage(float _average) { average = _average; };
+  void setAverage(std::vector<Film> tmp, uint64_t number);
+  void setTime(double _time) { time = _time; };
+  void saveOrPrint(std::vector<Film> films, std::string fileName);
+
   std::vector<std::string> parser(std::string line);
-  void addMovie(std::vector<std::string>);
 };
 
 #endif
