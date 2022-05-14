@@ -204,3 +204,18 @@ void Data::saveOrPrint(std::vector<Film> films, std::string fileName) {
     }
   }
 }
+
+void Data::checkSort(std::vector<Film> toCheck) {
+  if (toCheck.size() == 0) {
+    ifSorted = false;
+    return;
+  }
+  for (uint64_t i = 1; i < toCheck.size(); ++i) {
+    if (toCheck[i].getRating() < toCheck[i - 1].getRating()) {
+      ifSorted = false;
+      return;
+    }
+  }
+  ifSorted = true;
+  return;
+}

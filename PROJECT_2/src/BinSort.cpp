@@ -26,8 +26,14 @@ void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
       sorted.emplace_back(element);
     }
   }
+  records->checkSort(sorted);
+  if (!records->getIfSorted()) {
+    std::cout << "Movies were sorted incorrectly!" << std::endl;
+    return;
+  }
+
   records->setMedian(sorted, number);
-  records->setAverage(tmp, number);
+  records->setAverage(sorted, number);
   records->setTime(elapsed_seconds.count());
 
   records->saveOrPrint(sorted, "BSorted.txt");

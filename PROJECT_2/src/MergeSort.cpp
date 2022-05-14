@@ -30,6 +30,12 @@ void mergeSort(std::vector<Film> movies, uint64_t number, Data* records) {
   end = std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end - start;
 
+  records->checkSort(tmp);
+  if (!records->getIfSorted()) {
+    std::cout << "Movies were sorted incorrectly!" << std::endl;
+    return;
+  }
+
   records->setMedian(tmp, number);
   records->setAverage(tmp, number);
   records->setTime(elapsed_seconds.count());

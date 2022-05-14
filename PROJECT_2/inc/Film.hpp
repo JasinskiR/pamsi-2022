@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 
-//  ordinal no. ; title ; year ; rating
 class Film {
  private:
   uint64_t ordinalNo{};
@@ -22,7 +21,6 @@ class Film {
   void setOrdNo(uint64_t _ordinalNo) { ordinalNo = _ordinalNo; };
   void setTitle(std::string _title) { title = _title; };
   void setRating(float _rating) { rating = _rating; };
-  bool operator<(Film other) { return this->rating < other.rating; }
 };
 
 std::ostream &operator<<(std::ostream &stream, const Film &movie);

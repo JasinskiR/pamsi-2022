@@ -20,6 +20,7 @@ class Data {
   float median{};
   void clearVar();
   double time{};
+  bool ifSorted{};
 
  public:
   void readFile();
@@ -33,11 +34,13 @@ class Data {
   float getAverageRating() { return average; };
   float getMedian() { return median; };
   double getTime() { return time; };
+  bool getIfSorted() { return ifSorted; };
 
   void setMedian(std::vector<Film> toMedian, uint64_t number);
   void setAverage(std::vector<Film> tmp, uint64_t number);
   void setTime(double _time) { time = _time; };
   void saveOrPrint(std::vector<Film> films, std::string fileName);
+  void checkSort(std::vector<Film> toCheck);
 
   std::vector<std::string> parser(std::string line);
 };

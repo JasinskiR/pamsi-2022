@@ -3,58 +3,39 @@ using namespace std;
 
 #include <algorithm>
 
-Film magic5(std::vector<Film> movieList, int low, int high) {
-  if (high - low <= 5) {
-    for (int k = low; k < high; ++k) {
-      for (int l = k + 1; l <= high; ++l) {
-        if (movieList[k].getRating() > movieList[l].getRating())
-          std::swap(movieList[k], movieList[l]);
-      }
+void partition(std::vector<Film>& movieList, int low, int high, int& i,
+               int& j) {
+  if (high - low <= 1) {
+    if (movieList[high].getRating() < movieList[low].getRating()) {
+      std::swap(movieList[high], movieList[low]);
     }
-    return movieList[(low + high) / 2];
+    i = low;
+    j = high;
+    return;
   }
-  std::vector<Film> tmp;
-  for (int i = low; i <= high; i += 5) {
-    int j = std::min(high + 1, i + 5);
-    std::vector<Film> v =
-        std::vector<Film>(movieList.begin() + i, movieList.begin() + j);
-    for (int k = 0; k < v.size() - 1; ++k) {
-      for (int l = k + 1; l < v.size(); ++l) {
-        if (v[k].getRating() > v[l].getRating()) std::swap(v[k], v[l]);
-      }
+
+  int middle = low;
+  float pivot = movieList[high].getRating();
+  while (middle <= high) {
+    if (movieList[middle].getRating() < pivot) {
+      std::swap(movieList[low++], movieList[middle++]);
+    } else if (movieList[middle].getRating() == pivot) {
+      middle++;
+    } else if (movieList[middle].getRating() > pivot) {
+      std::swap(movieList[middle], movieList[high--]);
     }
-    tmp.push_back(v[v.size() / 2]);
   }
-  return magic5(tmp, 0, tmp.size() - 1);
+  i = low - 1;
+  j = middle;
 }
 
 void qSort(std::vector<Film>& movieList, int low, int high) {
-  Film pivot = magic5(movieList, low, high);
-  int pivotIndex = 0, i = 0;
+  if (low >= high) return;
 
-  for (i = low; i <= high; i++) {
-    if (movieList[i].getTitle() == pivot.getTitle()) break;
-  }
-
-  movieList[i] = movieList[high];
-  for (pivotIndex = i = low; i < high; ++i) {
-    if (movieList[i].getRating() < pivot.getRating()) {
-      swap(movieList[i], movieList[pivotIndex]);
-      pivotIndex++;
-    }
-  }
-  int sameRate = pivotIndex + 1;
-  for (int k = pivotIndex + 1; k < high; k++) {
-    if (movieList[k].getRating() == pivot.getRating()) {
-      swap(movieList[k], movieList[sameRate]);
-      sameRate++;
-    }
-  }
-
-  movieList[high] = movieList[pivotIndex];
-  movieList[pivotIndex] = pivot;
-  if (low < pivotIndex - 1) qSort(movieList, low, pivotIndex - 1);
-  if (sameRate < high) qSort(movieList, sameRate, high);
+  int i = 0, j = 0;
+  partition(movieList, low, high, i, j);
+  qSort(movieList, low, i);
+  qSort(movieList, j, high);
 }
 
 void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
@@ -65,6 +46,12 @@ void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
   qSort(tmp, 0, tmp.size() - 1);
   end = std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end - start;
+
+  records->checkSort(tmp);
+  if (!records->getIfSorted()) {
+    std::cout << "Movies were sorted incorrectly!" << std::endl;
+    return;
+  }
 
   records->setMedian(tmp, number);
   records->setAverage(tmp, number);
