@@ -4,7 +4,7 @@
 
 ## Informational details of the task 
 
-
+There is parser.py programm which was used to check corectness of reading and sorting data
 
 - Deadline for the commissioning of the task : 16/05/2022
 - A task that will be implemented  - task for assessment: 5.0
