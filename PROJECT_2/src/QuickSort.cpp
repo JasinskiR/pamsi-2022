@@ -53,8 +53,8 @@ void quickSort(std::vector<Film> movies, uint64_t number, Data* records) {
     return;
   }
 
-  records->setMedian(tmp, number);
-  records->setAverage(tmp, number);
+  records->setMedian(tmp);
+  records->setAverage(tmp);
   records->setTime(elapsed_seconds.count());
 
   records->saveOrPrint(tmp, "QSorted.txt");

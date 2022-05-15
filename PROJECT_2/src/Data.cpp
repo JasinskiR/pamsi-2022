@@ -22,40 +22,8 @@ void Data::readFile() {
 
     lines.push_back(tmp);
   }
-  // filter(lines.size());
-  universalFilter(lines.size());
+  universalFilter();
   allMovies = numberOfMovies;
-}
-
-void Data::filter(uint64_t amount) {
-  clearVar();
-  Film movie;
-  for (uint64_t i = 0; i < lines.size(); ++i) {
-    if (lines[i].size() == 0) continue;
-    auto comma = lines[i].find(",");
-    if (comma == 0 || comma == std::string::npos) continue;
-    movie.setOrdNo(stoi(lines[i].substr(0, comma)));
-
-    uint8_t titleBegin = comma + 1;
-    // reading a comma 5 char from the end - rating position
-    comma = lines[i].find(",", lines[i].size() - 5);
-    if (comma == std::string::npos) continue;
-    movie.setTitle(lines[i].substr(titleBegin, comma - titleBegin));
-
-    auto ratingBegin = comma + 1;
-    if (ratingBegin != lines.size()) {
-      try {
-        movie.setRating(std::stof(
-            lines[i].substr(ratingBegin, lines.size() - ratingBegin)));
-      } catch (std::invalid_argument const& ex) {
-        continue;
-      }
-      numberOfMovies++;
-      movies.push_back(movie);
-      average += movie.getRating();
-      if (amount == numberOfMovies) break;
-    }
-  }
 }
 
 void Data::clearVar() {
@@ -65,21 +33,20 @@ void Data::clearVar() {
   median = 0;
 }
 
-void Data::setMedian(std::vector<Film> tmp, uint64_t number) {
-  median =
-      number % 2
-          ? tmp[number / 2].getRating()
-          : ((tmp[number / 2].getRating() + tmp[(number / 2) - 1].getRating()) /
-             2);
+void Data::setMedian(std::vector<Film> tmp) {
+  median = tmp.size() % 2 ? tmp[tmp.size() / 2].getRating()
+                          : ((tmp[tmp.size() / 2].getRating() +
+                              tmp[(tmp.size() / 2) - 1].getRating()) /
+                             2);
 }
-void Data::setAverage(std::vector<Film> tmp, uint64_t number) {
+void Data::setAverage(std::vector<Film> tmp) {
   average = std::accumulate(tmp.begin(), tmp.end(), 0,
                             [](int i = 0, const Film& movie) {
                               return movie.getRating() + i;
                             }) /
-            (float)number;
+            (float)tmp.size();
 }
-void Data::universalFilter(uint64_t amount) {
+void Data::universalFilter() {
   clearVar();
   for (uint64_t i = 0; i < lines.size(); ++i) {
     addMovie(parser(lines.at(i)));

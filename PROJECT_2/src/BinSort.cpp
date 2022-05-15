@@ -32,8 +32,8 @@ void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
     return;
   }
 
-  records->setMedian(sorted, number);
-  records->setAverage(sorted, number);
+  records->setMedian(sorted);
+  records->setAverage(sorted);
   records->setTime(elapsed_seconds.count());
 
   records->saveOrPrint(sorted, "BSorted.txt");
