@@ -4,13 +4,15 @@
 
 ## Informational details of the task 
 
-- [ ] There are test in [./test](https://gitlab.com/JasinskiR259384/pamsi-2022/-/tree/main/PROJECT_1/tests) directory. It contains:
+
+
+- There are test in [./test](https://gitlab.com/JasinskiR259384/pamsi-2022/-/tree/main/PROJECT_1/tests) directory. It contains:
     -  test.sh script
     -  Shuffled Inwokacja.txt file
     -  Shuffled book Mały Książe in Maly_Ksiaze.txt
-- [ ] Deadline for the commissioning of the task : 04/04/2022
-- [ ] A task that will be implemented  - task for assessment: 5.0
-- [ ] Final assessment of the task  - [NULL]
+- Deadline for the commissioning of the task : 04/04/2022
+-  A task that will be implemented  - task for assessment: 5.0
+- Final assessment of the task  - [5.15 / 5]
 
 [PDF with report of the task ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_1/Report_PAMSI_1.pdf)
 
