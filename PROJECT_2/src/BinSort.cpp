@@ -6,6 +6,8 @@ using namespace std;
 void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
            uint64_t number) {
   for (uint64_t movie = 0; movie < number; ++movie) {
+    // the movies are copied to new vector at specific position according to
+    // rating
     movieByRate[static_cast<int>(movies[movie].getRating()) - 1].push_back(
         movies[movie]);
   }
