@@ -1,5 +1,6 @@
 #include "BinSort.hpp"
 
+#include <bits/stdc++.h>
 using namespace std;
 
 void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
@@ -13,7 +14,11 @@ void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
 void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
   std::vector<Film> sorted;
-  vector<vector<Film>> movieByRate(10);
+  auto ratingCompare = [&](const Film& a, const Film& b) {
+    return (a.getRating() < b.getRating());
+  };
+  auto maxRating = max_element(tmp.begin(), tmp.end(), ratingCompare);
+  vector<vector<Film>> movieByRate((int)maxRating->getRating());
 
   std::chrono::time_point<std::chrono::system_clock> start, end;
   start = std::chrono::system_clock::now();
