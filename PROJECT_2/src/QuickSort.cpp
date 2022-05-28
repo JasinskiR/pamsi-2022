@@ -5,6 +5,7 @@ using namespace std;
 
 void partition(std::vector<Film>& movieList, int low, int high, int& i,
                int& j) {
+  // situation if there were left only 2 elements
   if (high - low <= 1) {
     if (movieList[high].getRating() < movieList[low].getRating()) {
       std::swap(movieList[high], movieList[low]);
@@ -15,16 +16,23 @@ void partition(std::vector<Film>& movieList, int low, int high, int& i,
   }
 
   int middle = low;
+  // signs pivot as the value at the end of vector of movies
   float pivot = movieList[high].getRating();
+
+  // swap element to the left and right sides of pivot according to comparing of
+  // rating
   while (middle <= high) {
     if (movieList[middle].getRating() < pivot) {
       std::swap(movieList[low++], movieList[middle++]);
-    } else if (movieList[middle].getRating() == pivot) {
+    }
+    // move further if there is a value equal to pivot
+    else if (movieList[middle].getRating() == pivot) {
       middle++;
     } else if (movieList[middle].getRating() > pivot) {
       std::swap(movieList[middle], movieList[high--]);
     }
   }
+  // update the variables which are the "new borders of 3 cubes"
   i = low - 1;
   j = middle;
 }

@@ -5,18 +5,27 @@ using namespace std;
 
 void mSort(std::vector<Film>& movieList, std::vector<Film>& tmp, int low,
            int high) {
+  // Mid position of vector and iterators
   int middle, i1, i2, i;
 
+  // Set the middle of the vector
   middle = (low + high + 1) / 2;
   if (middle - low > 1) mSort(movieList, tmp, low, middle - 1);
   if (high - middle > 0) mSort(movieList, tmp, middle, high);
+  // Iteratir one is set as left value of first subvector
   i1 = low;
+  // Iteratir two is set as left value of second subvector
   i2 = middle;
+
+  // Now we compare elements from subvectors and copy the less value to
+  // temporary vector to store sorted movies. As they were compared we increase
+  // the iterator from this subvector from which the value was copied
   for (i = low; i <= high; i++)
     tmp[i] = ((i1 == middle) || ((i2 <= high) && (movieList[i1].getRating() >
                                                   movieList[i2].getRating())))
                  ? movieList[i2++]
                  : movieList[i1++];
+  // Copies the vector of sorted movies to the output vector
   for (i = low; i <= high; i++) movieList[i] = tmp[i];
 }
 

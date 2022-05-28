@@ -1,10 +1,13 @@
 #include "BinSort.hpp"
 
+#include <bits/stdc++.h>
 using namespace std;
 
 void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
            uint64_t number) {
   for (uint64_t movie = 0; movie < number; ++movie) {
+    // the movies are copied to new vector at specific position according to
+    // rating
     movieByRate[static_cast<int>(movies[movie].getRating()) - 1].push_back(
         movies[movie]);
   }
@@ -13,7 +16,11 @@ void bSort(vector<Film>& movies, vector<vector<Film>>& movieByRate,
 void binSort(std::vector<Film> movies, uint64_t number, Data* records) {
   std::vector<Film> tmp = {movies.begin(), movies.begin() + number};
   std::vector<Film> sorted;
-  vector<vector<Film>> movieByRate(10);
+  auto ratingCompare = [&](const Film& a, const Film& b) {
+    return (a.getRating() < b.getRating());
+  };
+  auto maxRating = max_element(tmp.begin(), tmp.end(), ratingCompare);
+  vector<vector<Film>> movieByRate((int)maxRating->getRating());
 
   std::chrono::time_point<std::chrono::system_clock> start, end;
   start = std::chrono::system_clock::now();
