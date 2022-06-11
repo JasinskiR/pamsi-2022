@@ -27,3 +27,6 @@
 [PDF with report of the task ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/main/PROJECT_2/Report_PAMSI_2.pdf)
 
 [PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/proj3.pdf)
+
+### Preview of the game menu
+![](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/images/readme/preview.png)
