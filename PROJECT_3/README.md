@@ -1,10 +1,8 @@
 # PROJECT 3
 
 
-## Checkers
-**Author**: Rafał Jasiński\
-**Description**: An app for "Checkers" - a board game vs AI.\
-**Future features**:
+# Checkers
+
 
 ## How to play
 **What you need**:
