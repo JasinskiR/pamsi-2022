@@ -1,0 +1,24 @@
+.button{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #f84d4d;
+    -fx-background-color: transparent;
+}
+
+.button:focused {
+    -fx-border-color: transparent;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 2);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:pressed {
+    -fx-text-fill: #ededed;
+}
+
+.button:hover {
+    -fx-underline:true;
+    -fx-fill:#ebebeb;
+}
