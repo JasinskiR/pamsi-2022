@@ -21,7 +21,7 @@
                 <Font name="Stencil" size="75.0" />
             </font>
         </Text>
-        <Text layoutX="115.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The white player always starts the game, after which turns alternate.Ordinary pieces or men always move one square diagonally forwards, to an unoccupied square:" wrappingWidth="921.7294921875">
+        <Text layoutX="115.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The white player always starts the game, after which turns alternate. Ordinary pieces or men always move one square diagonally forwards, to an unoccupied square:" wrappingWidth="921.7294921875">
             <font>
                 <Font name="Bell MT" size="20.0" />
             </font>
