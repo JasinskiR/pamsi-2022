@@ -17,7 +17,8 @@
 - set up your run/debug configuration 
 - Run -> Edit Configurations -> Click '+'  -> Add Application -> Modify options -> Add VM options
   and paste this to VM options: 
-- _--module-path /path/to/SDK/lib --add-modules javafx.controls,javafx.fxml_
+
+```--module-path /path/to/SDK/lib --add-modules javafx.controls,javafx.fxml```
 
 ### Informational details of the task
 - Deadline for the commissioning of the task : 13/06/2022
@@ -29,4 +30,4 @@
 [PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/proj3.pdf)
 
 ### Preview of the game menu
-![](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/images/readme/preview.png)
+![Preview of menu](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/images/readme/preview.png)
