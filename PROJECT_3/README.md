@@ -29,5 +29,10 @@
 
 [PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/proj3.pdf)
 
-### Preview of the game menu
-![Preview of menu](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/images/readme/preview.png)
+### Preview of the game
+<details><summary>Click to see images</summary>
+
+![](images/readme/preview.png)
+![](images/readme/settings.png)
+![](images/readme/game.png)
+</details>
