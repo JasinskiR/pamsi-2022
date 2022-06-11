@@ -12,10 +12,12 @@
 - javaFX 18 SDK
 
 **What to do**:
-- set up your IDE so it can run main.java 
-- File -> Project Structure -> Libraries -> add path to javaFX _lib_ directory
+- set up your IDE, so it can run main.java :
+
+File -> Project Structure -> Libraries -> add path to javaFX lib directory
 - set up your run/debug configuration 
-- Run -> Edit Configurations -> Click '+'  -> Add Application -> Modify options -> Add VM options
+
+Run -> Edit Configurations -> Click '+'  -> Add Application -> Modify options -> Add VM options
   and paste this to VM options: 
 
 ```--module-path /path/to/SDK/lib --add-modules javafx.controls,javafx.fxml```
