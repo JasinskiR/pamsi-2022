@@ -27,7 +27,7 @@ public class CreateGameSettingController {
     @FXML
     public void initialize() throws FileNotFoundException {
         if (GlobalVar.difficulty == 0) {
-            id_difficulty.setText("Easy");
+            id_difficulty.setText("Random fiesta");
         } else if (GlobalVar.difficulty == 1) {
             id_difficulty.setText("Mid");
         } else {
@@ -44,7 +44,7 @@ public class CreateGameSettingController {
     protected void downDifficulty() {
         if (GlobalVar.difficulty > 0) GlobalVar.difficulty--;
         if (GlobalVar.difficulty == 1) id_difficulty.setText("Mid");
-        else id_difficulty.setText("Easy");
+        else id_difficulty.setText("Random fiesta");
     }
     @FXML
     protected void toGame(ActionEvent e) throws IOException {

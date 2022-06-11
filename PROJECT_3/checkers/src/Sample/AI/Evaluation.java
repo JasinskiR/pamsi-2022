@@ -1,12 +1,14 @@
 package Sample.AI;
 
+import Sample.Controllers.GlobalVar;
+
+import java.util.*;
+
 import static Sample.Controllers.GameFunctions.*;
 
 public class Evaluation {
   Integer[][] board;
-  int yourScore = 0;
-  int enemyScore = 0;
-  int _MULTIPLIER_ = 2;
+  int[] difficulty;
 
   public Evaluation(Integer[][] board) {
     this.board = board;
@@ -160,10 +162,10 @@ public class Evaluation {
     int numberOfPawns = numberOfYourPawns - numberOfEnemyPawns;
     int numberOfKings = numberOfYourKings - numberOfEnemyKings;
 
-    if (numberOfYourPawns + numberOfYourKings == 0){
+    if (numberOfYourPawns + numberOfYourKings == 0) {
       numberOfPawns = -1000;
     }
-    if (numberOfEnemyPawns + numberOfEnemyKings == 0){
+    if (numberOfEnemyPawns + numberOfEnemyKings == 0) {
       numberOfPawns = 1000;
     }
 
@@ -187,12 +189,36 @@ public class Evaluation {
                     numberOfLonerPawn,
                     numberOfLonerKings,
                     bridgePattern,
-                    numberOfHoles,};
-    int[] h = new int[]{20, 80, 3, 10, 7, 20, 2, 8, 12, 12, 7, 20, 4, 8, 4, 8, 6, 10, 20,
-            20};
+                    numberOfHoles};
+
+
+    // setting difficulty array
+
+    if (GlobalVar.difficulty == 2) { //hard AI
+      int[] h =
+              new int[]{20, 80, 3, 10, 7, 20, 2, 8, 12, 12, 7, 20, 4, 8, 4, 8, 6, 10, 20,
+                      20};
+      difficulty = h;
+    } else if (GlobalVar.difficulty == 1) { // medium AI
+      int[] m = new int[20];
+      Arrays.fill(m, 1);
+      difficulty = m;
+
+    } else { // random AI
+      int[] r = new int[20];
+      Random randParam = new Random();
+
+      for (int i = 0; i < param.length; i++) {
+        int random = randParam.nextInt(50) + 5;
+        r[i] = random;
+      }
+      difficulty = r;
+    }
+
+
     int result = 0;
     for (int i = 0; i < param.length; i++) {
-      result += param[i] * h[i];
+      result += param[i] * difficulty[i];
     }
 
     return result;

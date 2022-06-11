@@ -288,19 +288,59 @@ public class NeutralScreenController {
       yourPiecesLeft.setText(String.valueOf(yourPieces));
       enemyPiecesLeft.setText(String.valueOf(enemyPieces));
       if (!aiMoved) {
-        if (new Sample.AI.AllMoves(boardPosition(), 1).getPossibleMoves() == null)
+        if (new Sample.AI.AllMoves(boardPosition(), 1).getPossibleMoves().isEmpty())
           GlobalVar.result_ = GlobalVar.Result.TIE;
         else GlobalVar.result_ = GlobalVar.Result.WIN;
+        try {
+          Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+          throw new RuntimeException(ex);
+        }
         toEndOfGame(e);
       } else if (yourPieces == 0) {
         GlobalVar.result_ = GlobalVar.Result.LOSE;
+        try {
+          Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+          throw new RuntimeException(ex);
+        }
         toEndOfGame(e);
       } else if (enemyPieces == 0) {
         GlobalVar.result_ = GlobalVar.Result.WIN;
+        try {
+          Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+          throw new RuntimeException(ex);
+        }
         toEndOfGame(e);
-      } else if (new Sample.AI.AllMoves(boardPosition(), 1).getPossibleMoves() == null) {
+      } else if (new Sample.AI.AllMoves(boardPosition(), 1).getPossibleMoves().isEmpty()) {
         GlobalVar.result_ = GlobalVar.Result.LOSE;
+        try {
+          Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+          throw new RuntimeException(ex);
+        }
         toEndOfGame(e);
+      }
+      else {
+        Integer[][] temp = boardPosition();
+        int pawnsLeft=0;
+        int kingsLeft=0;
+        for (int a = 0; a < 8; a++) {
+          for (int b = 0; b < 8; b++) {
+            if (Math.abs(temp[a][b])==2) kingsLeft++;
+            if (Math.abs(temp[a][b])==1) pawnsLeft++;
+          }
+        }
+        if(kingsLeft == 2 && pawnsLeft == 0) {
+          GlobalVar.result_ = GlobalVar.Result.TIE;
+          try {
+            Thread.sleep(3000);
+          } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+          }
+          toEndOfGame(e);
+        }
       }
       return;
     }

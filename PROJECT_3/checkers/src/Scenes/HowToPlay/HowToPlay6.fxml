@@ -21,7 +21,7 @@
             <Font name="Stencil" size="75.0" />
          </font>
       </Text>
-      <Text layoutX="115.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⨀&#9;A player wins the game when the opponent no longer has any valid moves. This can be either because all of the player's pieces have been captured, or because they are all blocked and thus have no more squares available.&#10;&#10;⨀&#9;The game is drawn when both players make 25 consecutive king moves without capturing." wrappingWidth="921.7294921875">
+      <Text layoutX="115.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="⨀&#9;A player wins the game when the opponent no longer has any valid moves. This can be either because all of the player's pieces have been captured, or because they are all blocked and thus have no more squares available.&#10;&#10;⨀    The game is finished as draw whenever there are only 2 kings left (one for each player).&#10;&#10;" wrappingWidth="921.7294921875">
          <font>
             <Font name="Bell MT" size="20.0" />
          </font>

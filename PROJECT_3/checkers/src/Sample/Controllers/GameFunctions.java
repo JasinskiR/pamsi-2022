@@ -68,7 +68,8 @@ public class GameFunctions {
 
       if (!insideBoard(i + dir[0], j + dir[1]) || (turn == yourTurn &&
               !button.get(i + dir[0]).get(j + dir[1]).getId()
-                      .equals(Integer.toString(1 - yourTurn)))) continue;
+                      .equals(Integer.toString(1 - yourTurn)) && !button.get(i + dir[0]).get(j + dir[1]).getId()
+              .equals(Integer.toString(3 - yourTurn)))) continue;
 
       if ((button.get(i + dir[0]).get(j + dir[1]).getId()
               .equals(Integer.toString(1 - turn)) ||
