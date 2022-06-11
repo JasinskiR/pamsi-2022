@@ -20,7 +20,7 @@
 
 ```--module-path /path/to/SDK/lib --add-modules javafx.controls,javafx.fxml```
 
-### Informational details of the task
+## Informational details of the task
 - Deadline for the commissioning of the task : 13/06/2022
 - A task that will be implemented  - task for assessment: 5.0 - checkers with GUI
 - Final assessment of the task  - [NaN]
