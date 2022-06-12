@@ -77,6 +77,7 @@ public class GameSettingsController {
   @FXML
   protected void back(ActionEvent e) throws IOException {
     GlobalVar.difficulty = 1;
+    GlobalVar.depth = 4;
     root = FXMLLoader.load(
             Objects.requireNonNull(getClass().getResource("/Scenes/Menu.fxml")));
     stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
