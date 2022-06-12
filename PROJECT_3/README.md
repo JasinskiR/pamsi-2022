@@ -25,9 +25,9 @@ Run -> Edit Configurations -> Click '+'  -> Add Application -> Modify options ->
 - A task that will be implemented  - task for assessment: 5.0 - checkers with GUI
 - Final assessment of the task  - [NaN]
 
-[PDF with report of the task ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/main/PROJECT_2/Report_PAMSI_2.pdf)
+[PDF with report of the task ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/main/PROJECT_3/Report_PAMSI_3.pdf)
 
-[PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/dev1.0/PROJECT_3/proj3.pdf)
+[PDF with a list of tasks ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/main/PROJECT_3/proj3.pdf)
 
 ### Preview of the game
 <details><summary>Click to see images</summary>
