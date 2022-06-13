@@ -1,6 +1,5 @@
 package Sample.Algorithm;
 
-// TODO: game over inside first if statement
 
 import Sample.AI.AllMoves;
 import Sample.AI.Evaluation;
@@ -8,6 +7,15 @@ import Sample.AI.Evaluation;
 import java.util.ArrayList;
 
 public class MinMax {
+  /**
+   * MinMax algorithm
+   * @param position - board with "pieces"
+   * @param depth - depth of the recursion
+   * @param alpha - alpha param
+   * @param beta - beta param
+   * @param maximizing - if maximizing path
+   * @return
+   */
   public static Integer[][] minmax(Integer[][] position, int depth, Integer alpha,
                                    Integer beta, boolean maximizing) {
 

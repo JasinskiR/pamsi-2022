@@ -17,6 +17,10 @@ public class AllMoves {
     this.turn = turn;
   }
 
+  /**
+   * Method to get all possible moves from current position
+   * @return - array with possible moves
+   */
   public ArrayList<Integer[][]> getPossibleMoves() {
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {

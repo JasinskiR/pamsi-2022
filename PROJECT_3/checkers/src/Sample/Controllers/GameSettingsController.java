@@ -24,6 +24,10 @@ public class GameSettingsController {
   @FXML
   public Text id_depth;
 
+  /**
+   * Initialize difficulty and depth
+   * @throws FileNotFoundException
+   */
   @FXML
   public void initialize() throws FileNotFoundException {
     if (GlobalVar.difficulty == 0) {
@@ -38,6 +42,9 @@ public class GameSettingsController {
     Sample.Controllers.NeutralScreenController.enemyPieces = 12;
   }
 
+  /**
+   * Setting difficulty up
+   */
   @FXML
   protected void upDifficulty() {
     if (GlobalVar.difficulty < 2) GlobalVar.difficulty++;
@@ -45,6 +52,9 @@ public class GameSettingsController {
     else id_difficulty.setText("Hard");
   }
 
+  /**
+   * Setting difficulty down
+   */
   @FXML
   protected void downDifficulty() {
     if (GlobalVar.difficulty > 0) GlobalVar.difficulty--;
@@ -52,12 +62,18 @@ public class GameSettingsController {
     else id_difficulty.setText("Random fiesta");
   }
 
+  /**
+   * Setting depth up
+   */
   @FXML
   protected void upDepth() {
     if (GlobalVar.depth < 6) GlobalVar.depth += 2;
     id_depth.setText(Integer.toString(GlobalVar.depth));
   }
 
+  /**
+   * Setting depth down
+   */
   @FXML
   protected void downDepth() {
     if (GlobalVar.depth > 2) GlobalVar.depth -= 2;
@@ -85,15 +101,26 @@ public class GameSettingsController {
     stage.show();
   }
 
+  /**
+   * Setting color to black
+   * @throws IOException
+   */
   @FXML
   protected void chosenColorB() throws IOException {
     GlobalVar.color = GlobalVar.Color.black;
   }
 
+  /**
+   * Setting color to white
+   */
   public void chosenColorW() {
     GlobalVar.color = GlobalVar.Color.white;
   }
 
+  /**
+   * Setting color to random
+   * @throws IOException
+   */
   public void chosenColorWB() throws IOException {
     Random rand = new Random();
     int draw = rand.nextInt(2);

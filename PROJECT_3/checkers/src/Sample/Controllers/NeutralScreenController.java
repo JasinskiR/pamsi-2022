@@ -225,6 +225,13 @@ public class NeutralScreenController {
     stage.show();
   }
 
+  /**
+   * Method responsible for visualization possible and making chosen move
+   * if chosen
+   * @param e - action - clicked button
+   * @param i - int of current button
+   * @throws IOException
+   */
   @FXML
   public void toMove(ActionEvent e, int i) throws IOException {
 
