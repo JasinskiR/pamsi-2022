@@ -188,6 +188,7 @@ public class NeutralScreenController {
   public static int yourPieces = 12;
   public static int enemyPieces = 12;
 
+
   @FXML
   public void initialize() throws FileNotFoundException {
     button = new ArrayList<>(
@@ -235,7 +236,7 @@ public class NeutralScreenController {
     if (turn != yourTurn) {
       // bot move
       Integer[][] move = Sample.Algorithm.MinMax.minmax(boardPosition(), GlobalVar.depth,
-              null, null,
+              Integer.MIN_VALUE, Integer.MAX_VALUE,
               false);
       Integer[][] currentPosition = boardPosition();
       boolean aiMoved = false;
@@ -247,6 +248,7 @@ public class NeutralScreenController {
       }
       yourPieces = 0;
       enemyPieces = 0;
+      //changing board - color fill
       for (int a = 0; a < 8; a++) {
         for (int b = 0; b < 8; b++) {
           if (!Objects.equals(move[a][b], currentPosition[a][b])) aiMoved = true;
@@ -287,6 +289,7 @@ public class NeutralScreenController {
       turn = yourTurn;
       yourPiecesLeft.setText(String.valueOf(yourPieces));
       enemyPiecesLeft.setText(String.valueOf(enemyPieces));
+      //end of game occur
       if (!aiMoved) {
         if (new Sample.AI.AllMoves(boardPosition(), 1).getPossibleMoves().isEmpty())
           GlobalVar.result_ = GlobalVar.Result.TIE;
@@ -323,6 +326,7 @@ public class NeutralScreenController {
         toEndOfGame(e);
       }
       else {
+        //checking if any king left
         Integer[][] temp = boardPosition();
         int pawnsLeft=0;
         int kingsLeft=0;

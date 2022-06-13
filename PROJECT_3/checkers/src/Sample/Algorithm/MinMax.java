@@ -8,19 +8,9 @@ import Sample.AI.Evaluation;
 import java.util.ArrayList;
 
 public class MinMax {
-  public static Integer[][] minmax(Integer[][] position, int depth, Integer[][] alpha,
-                                   Integer[][] beta,
-                                   boolean maximizing) {
-    if (alpha == null && beta == null) {
-      alpha = new Integer[8][8];
-      for (int i = 0; i < 8; i++)
-        for (int j = 0; j < 8; j++)
-          alpha[i][j] = -2;
-      beta = new Integer[8][8];
-      for (int i = 0; i < 8; i++)
-        for (int j = 0; j < 8; j++)
-          beta[i][j] = 2;
-    }
+  public static Integer[][] minmax(Integer[][] position, int depth, Integer alpha,
+                                   Integer beta, boolean maximizing) {
+
     if (depth == 0) return position;
 
     if (maximizing) {
@@ -30,19 +20,15 @@ public class MinMax {
       ArrayList<Integer[][]> children = allMoves.getPossibleMoves();
       Integer[][] to_return = position;
       for (Integer[][] child : children) {
-        Integer[][] eval = minmax(copyArray(child), depth - 1, copyArray(alpha),
-                copyArray(beta),
-                false);
+        Integer[][] eval = minmax(copyArray(child), depth - 1, alpha, beta, false);
         int evalScore = new Evaluation(eval).evaluate();
         if (maxEval < evalScore) {
           maxEval = evalScore;
           res = eval;
           to_return = child;
         }
-        if (new Evaluation(alpha).evaluate() < evalScore)
-          alpha = eval;
-        if (new Evaluation(beta).evaluate() <= new Evaluation(alpha).evaluate())
-          break;
+        if (alpha < evalScore) alpha = evalScore;
+        if (beta <= alpha) break;
       }
       return to_return;
     } else {
@@ -52,18 +38,15 @@ public class MinMax {
       ArrayList<Integer[][]> children = allMoves.getPossibleMoves();
       Integer[][] to_return = position;
       for (Integer[][] child : children) {
-        Integer[][] eval = minmax(copyArray(child), depth - 1, copyArray(alpha), copyArray(beta),
-                true);
+        Integer[][] eval = minmax(copyArray(child), depth - 1, alpha, beta, true);
         int evalScore = new Evaluation(eval).evaluate();
         if (evalScore < minEval) {
           minEval = evalScore;
           res = eval;
           to_return = child;
         }
-        if (evalScore < new Evaluation(beta).evaluate())
-          beta = eval;
-        if (new Evaluation(beta).evaluate() <= new Evaluation(alpha).evaluate())
-          break;
+        if (evalScore < beta) beta = evalScore;
+        if (beta <= alpha) break;
       }
       return to_return;
     }
