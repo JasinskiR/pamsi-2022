@@ -23,7 +23,7 @@ Run -> Edit Configurations -> Click '+'  -> Add Application -> Modify options ->
 ## Informational details of the task
 - Deadline for the commissioning of the task : 13/06/2022
 - A task that will be implemented  - task for assessment: 5.0 - checkers with GUI
-- Final assessment of the task  - [NaN]
+- Final assessment of the task  - [5.15 / 5]
 
 [PDF with report of the task ](https://gitlab.com/JasinskiR259384/pamsi-2022/-/blob/main/PROJECT_3/Report_PAMSI_3.pdf)
 
